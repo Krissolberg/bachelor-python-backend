@@ -2,7 +2,7 @@
 *.py[cod]
 *.log
 *.sw[a-z]
-venv
+venv/
 
 # C extensions
 *.so
