@@ -1,3 +1,17 @@
 [build-system]
 requires = ["setuptools >= 40.6.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "bachelorbackend"
+authors = [{name = "Sufi"}]
+description = "noe"
+requires-python = ">=3.9"
+version = "1.1.1"
+dependencies = [
+        'fastAPI',
+        'shodan',
+        'python-dotenv',
+        'requests_cache',
+        ]
+
