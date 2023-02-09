@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import functions
+from . import functions
 
 print('Service mode enabled')
 app = FastAPI()
