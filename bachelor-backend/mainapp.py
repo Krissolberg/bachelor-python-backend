@@ -8,13 +8,14 @@ app = FastAPI()
 @app.get("/")
 async def root():
     # return {"message": "Hello World"}
-    return functions.shodanSearch('politiet.no')
+    return {"message"}
+    
 
 
 @app.get("/shodan")
 async def readShodan():
     # return functions.shodanSearch(input)
-    return {"message"}
+    return functions.shodanSearch('politiet.no')
     
 
 
