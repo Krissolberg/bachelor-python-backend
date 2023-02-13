@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from . import functions
+import functions
 
-print('Service mode enabled')
 app = FastAPI()
 
 @app.get("/")
@@ -9,6 +8,6 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/shodansearch")
-async def shodan():
+async def shodanUrlSearch():
     result = functions.shodanSearch('politiet.no')
     return result

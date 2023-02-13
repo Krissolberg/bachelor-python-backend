@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 40.6.0", "wheel"]
+requires = ["setuptools >= 40.6.0", "wheel", "pip >= 23.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,5 +13,6 @@ dependencies = [
         'shodan',
         'python-dotenv',
         'requests_cache',
+        'uvicorn'
         ]
 

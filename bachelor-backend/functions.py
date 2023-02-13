@@ -2,11 +2,7 @@ import shodan
 import sys
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv() # take environment from .env.
-
-SHODAN_API_KEY = os.getenv("API_KEY")
+SHODAN_API_KEY = ""
 
 api = shodan.Shodan(SHODAN_API_KEY)
 
