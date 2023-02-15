@@ -2,7 +2,9 @@ import sys
 import functions
 
 IP = functions.shodanSearch("politiet.no")
-print(IP)
 
+ips = []
 for i, j in IP:
-    functions.shodanHost(i)
+    ips.append(i)
+
+functions.shodanHost(ips)

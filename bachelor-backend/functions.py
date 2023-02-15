@@ -1,3 +1,7 @@
+import json
+
+from collections import defaultdict
+
 import shodan
 import sys
 import os
@@ -20,20 +24,27 @@ def shodanSearch(input):
     return data
 
 
-def shodanHost(input):
+def shodanHost(ips):
     # Lookup the host
-    host = api.host(input)
-    print(host)
-    # Print general info
-    print("""
-IP: {}
-Organization: {}
-Operating System: {}
-""".format(host['ip_str'], host.get('org', 'n/a'), host.get('os', 'n/a')))
+    data3 = defaultdict(list)
+    for i in ips:
+        host = api.host(i)
 
-    # Print all banners
-    for item in host['data']:
-        print("""
-Port: {}
-Banner: {}
-""".format(item['port'], item['data']))
+        for item in host['data']:
+            port = item['port']
+            try:
+                versions = item['ssl']['versions']
+                cipher = item['ssl']['cipher']
+            except:
+                versions = "tom"
+
+        data = {host['ip_str']: {'org': host['org'],
+                                 'os': host['os'],
+                                 'domains': host['domains'],
+                                 'port': port,
+                                 'versions': versions,
+                                 'cipher': cipher}}
+        for key, value in data.items():
+            data3[key].append(value)
+
+    print(json.dumps(data3, indent=6))
