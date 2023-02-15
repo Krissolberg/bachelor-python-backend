@@ -1,11 +1,8 @@
 import sys
 import functions
 
-input = sys.argv[1]
-
-functions.shodanSearch(input)
-IP = functions.shodanSearch(input)
+IP = functions.shodanSearch("politiet.no")
 print(IP)
 
-for i in IP:
+for i, j in IP:
     functions.shodanHost(i)
