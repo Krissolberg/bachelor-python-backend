@@ -1,3 +1,5 @@
+.idea/
+.sqlite
 .env
 *.py[cod]
 *.log
