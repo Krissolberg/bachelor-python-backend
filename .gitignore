@@ -1,5 +1,5 @@
 .idea/
-.sqlite
+*.sqlite
 .env
 *.py[cod]
 *.log
