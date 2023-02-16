@@ -1,16 +1,21 @@
-from fastapi import FastAPI
-import main as faen
+from typing import List, Union
+from pydantic import BaseModel, Field
+from fastapi import FastAPI, Query
+import main as sho
 
 app = FastAPI()
 
+class Item(BaseModel):
+    Field(default=None, example="noe")
+
 @app.get("/")
-async def root():
+def root():
     return {"message": "Hello World"}
 
 
 @app.get("/shodansearch")
-async def shodanUrlSearch():
-    result = faen.sok(['politiet.no'])
+async def shodanSearch(URLs_and_IPs: List[str] = Query(None)):
+    result = sho.sok(URLs_and_IPs)
     return result
 
 '''

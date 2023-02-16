@@ -4,7 +4,6 @@ import shodanFunc
 
 def sok(inndata):
     # inndata er et array, denne kan inneholde både URL og IP
-    inndata = ["politiet.no"]
 
     # Filtrer ut IP-ene fra inndata
     ips = ipUrlFilter.filterUrlIp(inndata)
@@ -13,12 +12,13 @@ def sok(inndata):
     url = list(set(inndata) - set(ips))
 
     # Gjør en shodanSearch på Url, og legger funnet IP til ips-variabelen
+    searchresult = []
     for i in url:
-        searchresult = shodanFunc.shodanSearch(i)
-
-    if len(searchresult) > 0:
-        for i in searchresult[2]:
-            ips.append(i)
+        temp = shodanFunc.shodanSearch(i)
+        searchresult.append(temp)
+        ips.extend(temp[2])
+    print(searchresult)
+    print(ips)
 
     # Gjør en fullstendig søk på hver IP og skriver ut ønsket data
     hostresult = []
@@ -26,5 +26,9 @@ def sok(inndata):
         for i in ips:
             hostresult.append(shodanFunc.shodanHost(i))
 
-    # print(json.dumps(data3, indent=6))
-    return hostresult
+    # print(json.dumps(hostresult, indent=6))
+
+    result=[]
+    result.append(searchresult)
+    result.append(hostresult)
+    return result

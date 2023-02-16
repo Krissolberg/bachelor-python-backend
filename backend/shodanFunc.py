@@ -1,6 +1,7 @@
 import shodan
+import cacheService
 
-SHODAN_API_KEY = "HfDcFJOFVgov1yFgDuDPVe3ExvNbYViP"
+SHODAN_API_KEY = ""
 
 api = shodan.Shodan(SHODAN_API_KEY)
 
