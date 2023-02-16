@@ -17,8 +17,6 @@ def sok(inndata):
         temp = shodanFunc.shodanSearch(i)
         searchresult.append(temp)
         ips.extend(temp[2])
-    print(searchresult)
-    print(ips)
 
     # Gjør en fullstendig søk på hver IP og skriver ut ønsket data
     hostresult = []
