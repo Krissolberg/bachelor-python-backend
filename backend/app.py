@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import FastAPI, Query, Header
-import main as sho
+import shodanFunc as sho
 
 tags_metadata = [
     {
