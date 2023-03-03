@@ -2,16 +2,13 @@ import shodan
 import backend.apiExtentions.shodanDataFilter as shodanFilter
 from backend import cacheService
 
-auth = "YzZmjxnuVu8cr0H5HCpMcjFrLMG1zVFP"
-
+auth = ""
 
 def shodanSearch(indata):
-    # Search Shodan
     ip, org = [], []
 
     results = shodan.Shodan(auth).search(indata)
 
-    # Show the results
     for result in results['matches']:
         try:
             ip.append(result['ip_str'])
