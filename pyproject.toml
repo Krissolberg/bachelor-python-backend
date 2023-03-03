@@ -12,6 +12,7 @@ dependencies = [
         'fastAPI',
         'shodan',
         'python-dotenv',
+        'pymongo',
         'requests_cache',
         'uvicorn'
         ]

@@ -1,115 +1,58 @@
-import ipaddress
-import json
-import shodan
-
+import multiprocessing
 import apiExtentions.shodanDataFilter as shodanFilter
+import apiExtentions.shodanGetService as shodanGet
 
-auth = "YzZmjxnuVu8cr0H5HCpMcjFrLMG1zVFP"
-
-
-def shodanSearch(indata):
-    # Search Shodan
-    ip, org = [], []
-    data = {indata: {}}
-
-    results = shodan.Shodan(auth).search(indata)
-
-    # Show the results
-    for result in results['matches']:
-        try:
-            ip.append(result['ip_str'])
-        except:
-            break
-        try:
-            org.append(result['org'])
-        except:
-            break
-
-    datatemp = {indata: {'result': results['total'],
-                         'ip': ip,
-                         'org': org}}
-
-    for key, value in datatemp.items():
-        data[key] = value
-
-    return data
-
-
-def shodanHost(ips):
-    global port, versions, cipher
-
-    host = shodan.Shodan(auth).host(ips)
-
-    for item in host['data']:
-        port = item['port']
-        try:
-            versions = item['ssl']['versions']
-        except:
-            versions = "Not found"
-        try:
-            cipher = item['ssl']['cipher']
-        except:
-            cipher = "Not found"
-        try:
-            vulns = shodanFilter.getVulns(host['data'])
-        except:
-            vulns = "Not found"
-
-    data = {host['ip_str']: {'org': host['org'],
-                             'os': host['os'],
-                             'hostnames': host['hostnames'],
-                             'domains': host['domains'],
-                             'port': port,
-                             'versions': versions,
-                             'cipher': cipher,
-                             'vulns': vulns}}
-
-    data3 = {host['ip_str']: {}}
-    for key, value in data.items():
-        data3[key] = value
-
-    # print(json.dumps(data3, indent=6))
-
-    return data3
+import time
+import json
 
 
 def sok(inndata):
-    # inndata er et array, denne kan inneholde både URL og IP
+    # inndata er et array, denne kan inneholde både URL, IP og IP-range
 
-    # Filtrer ut IP-ene fra inndata
+    # Filtrering av IP og IP-range
     iprange, iprangesplit, ip = shodanFilter.filterUrlIp(inndata)
 
-    # Filtrerer ut funnet IP av inndata
+    # Filtrerer ut funnet IP og IP-range fra inndata
     url = list(set(inndata) - set(iprange) - set(ip))
 
-    # Lager individuell ip for range, og legger det i ip-array
-    for i in iprangesplit:
-        intRange = ((int(ipaddress.ip_address(i[1]))) - int(ipaddress.ip_address(i[0])))
-        for j in range(intRange):
-            ip.append(str(ipaddress.ip_address(int(ipaddress.ip_address(i[0])) + j)))
+    # Initialiserer multiprocessing. Her har jeg valgt å ha 8 workers
+    pool = multiprocessing.Pool(processes=8)
 
-    # Gjør en shodanSearch på Url, og legger funnet IP til ips-variabelen
+    # Lager individuell ip for range, og legger det i ip-array med multiprosessing
+    for i in range(len(iprangesplit)):
+        processes = pool.apply_async(func=shodanFilter.iprangesplitter, args=(iprangesplit[i]))
+        try:
+            ip.extend(processes.get())
+        except:
+            print("no")
+
+    # Gjør en shodanSearch på Url, og legger funnet IP til IP-arrayet
     searchresult = []
     for i in url:
-        temp = shodanSearch(i)
+        temp = shodanGet.shodanSearch(i)
         searchresult.append(temp)
         ip.extend(temp[i]['ip'])
 
-    # Gjør en fullstendig søk på hver IP og skriver ut ønsket data
+    # Gjør en fullstendig søk på hver IP og skriver ut ønsket data med multiprosessing
+    # Alle IP-ene blir også lagret i cache
     hostresult = []
     if len(ip) > 0:
         for i in ip:
+            processes = pool.apply_async(func=shodanGet.shodanHost, args=[i])
             try:
-                hostresult.append(shodanHost(i))
-            except:
+                hostresult.append(processes.get())
+            except SystemError:
                 hostresult.append({i: 'No result'})
-
-    # print(json.dumps(hostresult, indent=6))
 
     result = [searchresult, hostresult]
     return result
 
 
 # print(json.dumps(data3, indent=6))
-
-print(json.dumps(sok(["163.174.115.35-163.174.115.45"]), indent=6))
+"""
+if __name__ == "__main__":
+    tic = time.perf_counter()
+    print(json.dumps(sok(["163.174.115.125-163.174.115.165"]), indent=6))
+    tok = time.perf_counter()
+    print(f'Det tok {tok - tic:0.4f} sekunder')
+"""

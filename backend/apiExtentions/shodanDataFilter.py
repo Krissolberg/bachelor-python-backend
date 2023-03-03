@@ -1,3 +1,4 @@
+import ipaddress
 import re
 
 
@@ -32,3 +33,11 @@ def getVulns(data):
                         vulns.append(item[i])
 
     return vulns[0]
+
+
+def iprangesplitter(fra, til):
+    split = []
+    intRange = ((int(ipaddress.ip_address(til))) - int(ipaddress.ip_address(fra)))
+    for j in range(intRange + 1):
+        split.append(str(ipaddress.ip_address(int(ipaddress.ip_address(fra)) + j)))
+    return split
