@@ -1,6 +1,7 @@
 from typing import List
-from fastapi import FastAPI, Query, Header
-import shodanFunc as sho
+from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+import backend.shodanFunc as sho
 
 tags_metadata = [
     {
@@ -23,6 +24,15 @@ tags_metadata = [
 
 app = FastAPI(openapi_tags=tags_metadata)
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.get("/")
 def root():

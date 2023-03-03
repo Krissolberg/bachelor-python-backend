@@ -1,6 +1,6 @@
 import multiprocessing
-import apiExtentions.shodanDataFilter as shodanFilter
-import apiExtentions.shodanGetService as shodanGet
+import backend.apiExtentions.shodanDataFilter as shodanFilter
+import backend.apiExtentions.shodanGetService as shodanGet
 
 import time
 import json
