@@ -28,10 +28,9 @@ def shodanSearch(indata):
 
 def shodanHost(ips):
     global port, versions, cipher, host
-
     try:
         host = (cacheService.session.get(
-            f'https://api.shodan.io/shodan/host/{ips}?key=YzZmjxnuVu8cr0H5HCpMcjFrLMG1zVFP').json())
+            f'https://api.shodan.io/shodan/host/{ips}?key={auth}').json())
         host['data']
         for item in host['data']:
             port = item['port']
