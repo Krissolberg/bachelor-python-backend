@@ -1,4 +1,7 @@
 import multiprocessing
+
+import shodan
+
 import backend.apiExtentions.shodanDataFilter as shodanFilter
 import backend.apiExtentions.shodanGetService as shodanGet
 
@@ -20,8 +23,8 @@ def sok(inndata):
 
     # Lager individuell ip for range, og legger det i ip-array med multiprosessing
     for i in range(len(iprangesplit)):
-        processes = pool.apply_async(func=shodanFilter.iprangesplitter, args=(iprangesplit[i]))
         try:
+            processes = pool.apply_async(func=shodanFilter.iprangesplitter, args=(iprangesplit[i]))
             ip.extend(processes.get())
         except:
             print("no")
@@ -29,9 +32,12 @@ def sok(inndata):
     # Gjør en shodanSearch på Url, og legger funnet IP til IP-arrayet
     searchresult = []
     for i in url:
-        temp = shodanGet.shodanSearch(i)
-        searchresult.append(temp)
-        ip.extend(temp[i]['ip'])
+        try:
+            temp = shodanGet.shodanSearch(i)
+            searchresult.append(temp)
+            ip.extend(temp[i]['ip'])
+        except shodan.APIError:
+            return 'Invalid API key or you do not have access to use APIfilters in Shodan'
 
     # Gjør en fullstendig søk på hver IP og skriver ut ønsket data med multiprosessing
     # Alle IP-ene blir også lagret i cache
@@ -49,10 +55,9 @@ def sok(inndata):
 
 
 # print(json.dumps(data3, indent=6))
-"""
 if __name__ == "__main__":
     tic = time.perf_counter()
-    print(json.dumps(sok(["163.174.115.125-163.174.115.165"]), indent=6))
+    print(json.dumps(sok(['org:"Politiets IKT-tjenester (PIT)"']), indent=6))
     tok = time.perf_counter()
     print(f'Det tok {tok - tic:0.4f} sekunder')
-"""
+

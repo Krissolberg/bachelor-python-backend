@@ -34,6 +34,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+
 @app.get("/")
 def root():
     return {"message": "Hello World"}
@@ -51,21 +52,31 @@ async def single_search(url_ip: str = Query(...)):
     return sho.sok([url_ip])
 
 
+@app.get("/orgsearch", tags=["shodan"])
+async def org_search(org: str = Query(...)):
+    return sho.sok([f'org:"{org}"'])
+
+
+# ------------------------------------------------------------------------#
 @app.get("login", tags=["profile"])
 async def login(user: str, pw: str):
     return None
+
 
 @app.post("register", tags=["profile"])
 async def register(user: str, pw: str):
     return None
 
+
 @app.get("geturl", tags=["profileData"])
 async def geturl(user: str):
     return None
 
+
 @app.post("addurl", tags=["profileData"])
 async def addurl(user: str, data: str):
     return None
+
 
 @app.delete("removeurl", tags=["profileData"])
 async def removeurl(user: str, data: str):
