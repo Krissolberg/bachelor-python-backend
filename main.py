@@ -37,8 +37,11 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"message": "Hello World"}
+    return "Good day, sir!"
 
+@app.get("/shodankeyverifier", tags=["shodan"])
+def verify_shodan_key():
+    return sho.keyVerifier()
 
 @app.get("/search", tags=["shodan"])
 async def shodan_search(url_ip: List[str] = Query(...)):
@@ -55,6 +58,10 @@ async def single_search(url_ip: str = Query(...)):
 @app.get("/orgsearch", tags=["shodan"])
 async def org_search(org: str = Query(...)):
     return sho.sok([f'org:"{org}"'])
+
+@app.get("/dnssearch", tags=["shodan"])
+async def dns_search(dns: str = Query(...)):
+    return sho.dnsSok(dns)
 
 
 # ------------------------------------------------------------------------#
