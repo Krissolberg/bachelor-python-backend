@@ -1,15 +1,15 @@
 import requests_cache
-from requests_cache import CachedSession, MongoCache
+from requests_cache import CachedSession
 from datetime import timedelta
 
 requests_cache.install_cache(
     'shodan_cache',
-    #backend="mongodb"
+    backend="mongodb"
     )
-#MongoCache(db_name='shodan_cache')
+
 session = CachedSession(
     'shodan_cache',
-    #backend='mongodb',
+    backend='mongodb',
     use_cache_dir=True,
     cache_control=True,
     expire_after=timedelta(days=1),
