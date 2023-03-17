@@ -10,10 +10,7 @@ import time
 import json
 
 def keyVerifier():
-    try:
-        return shodan.Shodan(shodanGet.auth).info()
-    except:
-        return "Finner ingen Auth-key, har du lagt inn en fungerende Shodan API-key?"
+    return shodanGet.verifyKey()
 def sok(inndata):
     # inndata er et array, denne kan inneholde både URL, IP og IP-range
 

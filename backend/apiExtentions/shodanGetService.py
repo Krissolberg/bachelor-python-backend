@@ -69,3 +69,8 @@ def shodanDNS(domain):
     except:
         raise SystemError("Fant ingen DNS, fungerer API-key?")
 
+def verifyKey():
+    try:
+        return shodan.Shodan(auth).info()
+    except:
+        return "Finner ingen Auth-key, har du lagt inn en fungerende Shodan API-key?"
