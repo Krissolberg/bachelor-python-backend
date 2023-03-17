@@ -1,4 +1,8 @@
-#!/bin/bash
+#! /bin/bash
+sudo apt update -y
+sudo apt install python3-pip -y
+sudo -H pip install --upgrade pip
+sudo apt install git -y
 apt-get update -y
 apt-get install apt-transport-https -y ca-certificates -y curl -y gnupg -y lsb-release -y
 mkdir -m 0755 -p /etc/apt/keyrings
