@@ -1,1170 +1,1170 @@
 [
   {
-    "navn": 0,
+    "navn": "0",
     "beskrivelse": "In programming APIs (not in communication between hosts), requests a system-allocated (dynamic) port"
   },
   {
-    "navn": 1,
+    "navn": "1",
     "beskrivelse": "TCP Port Service Multiplexer (TCPMUX). Historic. Both TCP and UDP have been assigned to TCPMUX by IANA, but by design only TCP is specified."
   },
   {
-    "navn": 2,
+    "navn": "2",
     "beskrivelse": "compressnet (Management Utility)"
   },
   {
-    "navn": 3,
+    "navn": "3",
     "beskrivelse": "compressnet (Compression Process)"
   },
   {
-    "navn": 5,
+    "navn": "5",
     "beskrivelse": "Remote Job Entry was historically using socket 5 in its old socket form, while MIB PIM has identified it as TCP/5 and IANA has assigned both TCP and UDP 5 to it."
   },
   {
-    "navn": 7,
+    "navn": "7",
     "beskrivelse": "Echo Protocol"
   },
   {
-    "navn": 9,
+    "navn": "9",
     "beskrivelse": "Discard Protocol"
   },
   {
-    "navn": 9,
+    "navn": "9",
     "beskrivelse": "Wake-on-LAN"
   },
   {
-    "navn": 11,
+    "navn": "11",
     "beskrivelse": "Active Users (systat service)"
   },
   {
-    "navn": 13,
+    "navn": "13",
     "beskrivelse": "Daytime Protocol"
   },
   {
-    "navn": 15,
+    "navn": "15",
     "beskrivelse": "Previously netstat service"
   },
   {
-    "navn": 17,
+    "navn": "17",
     "beskrivelse": "Quote of the Day (QOTD)"
   },
   {
-    "navn": 18,
+    "navn": "18",
     "beskrivelse": "Message Send Protocol"
   },
   {
-    "navn": 19,
+    "navn": "19",
     "beskrivelse": "Character Generator Protocol (CHARGEN)"
   },
   {
-    "navn": 20,
+    "navn": "20",
     "beskrivelse": "File Transfer Protocol (FTP) data transfer"
   },
   {
-    "navn": 21,
+    "navn": "21",
     "beskrivelse": "File Transfer Protocol (FTP) control (command)"
   },
   {
-    "navn": 22,
+    "navn": "22",
     "beskrivelse": "Secure Shell (SSH), secure logins, file transfers (scp, sftp) and port forwarding"
   },
   {
-    "navn": 23,
+    "navn": "23",
     "beskrivelse": "Telnet protocol—unencrypted text communications"
   },
   {
-    "navn": 25,
+    "navn": "25",
     "beskrivelse": "Simple Mail Transfer Protocol (SMTP), used for email routing between mail servers"
   },
   {
-    "navn": 27,
+    "navn": "27",
     "beskrivelse": "nsw-fe (NSW User System FE)"
   },
   {
-    "navn": 28,
+    "navn": "28",
     "beskrivelse": "Palo Alto Networks' Panorama High Availability (HA) sync encrypted port."
   },
   {
-    "navn": 29,
+    "navn": "29",
     "beskrivelse": "msg-icp (MSG ICP)"
   },
   {
-    "navn": 31,
+    "navn": "31",
     "beskrivelse": "msg-auth (MSG Authentication)"
   },
   {
-    "navn": 33,
+    "navn": "33",
     "beskrivelse": "dsp (Display Support Protocol)"
   },
   {
-    "navn": 37,
+    "navn": "37",
     "beskrivelse": "Time Protocol"
   },
   {
-    "navn": 38,
+    "navn": "38",
     "beskrivelse": "rap (Route Access Protocol)"
   },
   {
-    "navn": 38,
+    "navn": "38",
     "beskrivelse": "rlp (Resource Location Protocol)"
   },
   {
-    "navn": 41,
+    "navn": "41",
     "beskrivelse": "graphics (Graphics)"
   },
   {
-    "navn": 42,
+    "navn": "42",
     "beskrivelse": "Host Name Server Protocol"
   },
   {
-    "navn": 43,
+    "navn": "43",
     "beskrivelse": "WHOIS protocol"
   },
   {
-    "navn": 44,
+    "navn": "44",
     "beskrivelse": "mpm-flags\t(MPM FLAGS Protocol)"
   },
   {
-    "navn": 45,
+    "navn": "45",
     "beskrivelse": "mpm (Message Processing Module [recv])"
   },
   {
-    "navn": 46,
+    "navn": "46",
     "beskrivelse": "mpm-snd (MPM [default send])"
   },
   {
-    "navn": 47,
+    "navn": "47",
     "beskrivelse": ""
   },
   {
-    "navn": 48,
+    "navn": "48",
     "beskrivelse": "auditd (Digital Audit Daemon)"
   },
   {
-    "navn": 49,
+    "navn": "49",
     "beskrivelse": "TACACS Login Host protocol. TACACS+, still in draft which is an improved but distinct version of TACACS, only uses TCP 49."
   },
   {
-    "navn": 50,
+    "navn": "50",
     "beskrivelse": "re-mail-ck (Remote Mail Checking Protocol)"
   },
   {
-    "navn": 51,
+    "navn": "51",
     "beskrivelse": "Historically used for Interface Message Processor logical address management, entry has been removed by IANA on 2013-05-25"
   },
   {
-    "navn": 52,
+    "navn": "52",
     "beskrivelse": "Xerox Network Systems (XNS) Time Protocol. Despite this port being assigned by IANA, the service is meant to work on SPP (ancestor of IPX/SPX), instead of TCP/IP."
   },
   {
-    "navn": 53,
+    "navn": "53",
     "beskrivelse": "Domain Name System (DNS)"
   },
   {
-    "navn": 54,
+    "navn": "54",
     "beskrivelse": "Xerox Network Systems (XNS) Clearinghouse (Name Server). Despite this port being assigned by IANA, the service is meant to work on SPP (ancestor of IPX/SPX), instead of TCP/IP."
   },
   {
-    "navn": 55,
+    "navn": "55",
     "beskrivelse": "isi-gl (ISI Graphics Language)"
   },
   {
-    "navn": 56,
+    "navn": "56",
     "beskrivelse": "Xerox Network Systems (XNS) Authentication Protocol. Despite this port being assigned by IANA, the service is meant to work on SPP (ancestor of IPX/SPX), instead of TCP/IP."
   },
   {
-    "navn": 58,
+    "navn": "58",
     "beskrivelse": "Xerox Network Systems (XNS) Mail. Despite this port being assigned by IANA, the service is meant to work on SPP (ancestor of IPX/SPX), instead of TCP/IP."
   },
   {
-    "navn": 61,
+    "navn": "61",
     "beskrivelse": "Historically assigned to the NIFTP-Based Mail protocol, but was never documented in the related IEN. The port number entry was removed from IANA's registry on 2017-05-18."
   },
   {
-    "navn": 62,
+    "navn": "62",
     "beskrivelse": "acas (ACA Services)"
   },
   {
-    "navn": 63,
+    "navn": "63",
     "beskrivelse": "whoispp (whois++)"
   },
   {
-    "navn": 64,
+    "navn": "64",
     "beskrivelse": "covia (Communications Integrator (CI))"
   },
   {
-    "navn": 65,
+    "navn": "65",
     "beskrivelse": "tacacs-ds (TACACS-Database Service)"
   },
   {
-    "navn": 66,
+    "navn": "66",
     "beskrivelse": "sql-net (Oracle SQL*NET)"
   },
   {
-    "navn": 67,
+    "navn": "67",
     "beskrivelse": "Bootstrap Protocol (BOOTP) server"
   },
   {
-    "navn": 68,
+    "navn": "68",
     "beskrivelse": "Bootstrap Protocol (BOOTP) client"
   },
   {
-    "navn": 69,
+    "navn": "69",
     "beskrivelse": "Trivial File Transfer Protocol (TFTP)"
   },
   {
-    "navn": 70,
+    "navn": "70",
     "beskrivelse": "Gopher protocol"
   },
   {
-    "navn": 74,
+    "navn": "74",
     "beskrivelse": "NETRJS protocol"
   },
   {
-    "navn": 76,
+    "navn": "76",
     "beskrivelse": "deos (Distributed External Object Store)"
   },
   {
-    "navn": 78,
+    "navn": "78",
     "beskrivelse": "vettcp (vettcp)"
   },
   {
-    "navn": 79,
+    "navn": "79",
     "beskrivelse": "Finger protocol"
   },
   {
-    "navn": 80,
+    "navn": "80",
     "beskrivelse": "Hypertext Transfer Protocol (HTTP) uses TCP in versions 1.x and 2. HTTP/3 uses QUIC, a transport protocol on top of UDP."
   },
   {
-    "navn": 81,
+    "navn": "81",
     "beskrivelse": "TorPark onion routing[verification needed]"
   },
   {
-    "navn": 82,
+    "navn": "82",
     "beskrivelse": "xfer (XFER Utility)"
   },
   {
-    "navn": 82,
+    "navn": "82",
     "beskrivelse": "TorPark control[verification needed]"
   },
   {
-    "navn": 83,
+    "navn": "83",
     "beskrivelse": "mit-ml-dev (MIT ML Device)"
   },
   {
-    "navn": 84,
+    "navn": "84",
     "beskrivelse": "ctf (Common Trace Facility)"
   },
   {
-    "navn": 85,
+    "navn": "85",
     "beskrivelse": "mit-ml-dev (MIT ML Device)"
   },
   {
-    "navn": 86,
+    "navn": "86",
     "beskrivelse": "mfcobol (Micro Focus Cobol)"
   },
   {
-    "navn": 88,
+    "navn": "88",
     "beskrivelse": "Kerberos authentication system"
   },
   {
-    "navn": 89,
+    "navn": "89",
     "beskrivelse": "su-mit-tg\t(SU/MIT Telnet Gateway)"
   },
   {
-    "navn": 90,
+    "navn": "90",
     "beskrivelse": "dnsix\t(DNSIX Security Attribute Token Map)"
   },
   {
-    "navn": 90,
+    "navn": "90",
     "beskrivelse": "PointCast (dotcom)"
   },
   {
-    "navn": 91,
+    "navn": "91",
     "beskrivelse": "mit-dov (MIT Dover Spooler)"
   },
   {
-    "navn": 92,
+    "navn": "92",
     "beskrivelse": "npp (Network Printing Protocol)"
   },
   {
-    "navn": 93,
+    "navn": "93",
     "beskrivelse": "dcp (Device Control Protocol)"
   },
   {
-    "navn": 94,
+    "navn": "94",
     "beskrivelse": "objcall (Tivoli Object Dispatcher)"
   },
   {
-    "navn": 95,
+    "navn": "95",
     "beskrivelse": "SUPDUP, terminal-independent remote login"
   },
   {
-    "navn": 96,
+    "navn": "96",
     "beskrivelse": "dixie (DIXIE Protocol Specification)"
   },
   {
-    "navn": 97,
+    "navn": "97",
     "beskrivelse": "swift-rvf (Swift Remote Virtual File Protocol)"
   },
   {
-    "navn": 98,
+    "navn": "98",
     "beskrivelse": "tacnews (TAC News)"
   },
   {
-    "navn": 99,
+    "navn": "99",
     "beskrivelse": "metagram (Metagram Relay)"
   },
   {
-    "navn": 101,
+    "navn": "101",
     "beskrivelse": "NIC host name"
   },
   {
-    "navn": 102,
+    "navn": "102",
     "beskrivelse": "ISO Transport Service Access Point (TSAP) Class 0 protocol"
   },
   {
-    "navn": 104,
+    "navn": "104",
     "beskrivelse": "Digital Imaging and Communications in Medicine (DICOM"
   },
   {
-    "navn": 105,
+    "navn": "105",
     "beskrivelse": "CCSO Nameserver"
   },
   {
-    "navn": 106,
+    "navn": "106",
     "beskrivelse": "macOS Server, (macOS) password server"
   },
   {
-    "navn": 107,
+    "navn": "107",
     "beskrivelse": "Remote User Telnet Service (RTelnet)"
   },
   {
-    "navn": 108,
+    "navn": "108",
     "beskrivelse": "IBM Systems Network Architecture (SNA) gateway access server"
   },
   {
-    "navn": 109,
+    "navn": "109",
     "beskrivelse": "Post Office Protocol, version 2 (POP2)"
   },
   {
-    "navn": 110,
+    "navn": "110",
     "beskrivelse": "Post Office Protocol, version 3 (POP3)"
   },
   {
-    "navn": 111,
+    "navn": "111",
     "beskrivelse": "Open Network Computing Remote Procedure Call (ONC RPC, sometimes referred to as Sun RPC)"
   },
   {
-    "navn": 113,
+    "navn": "113",
     "beskrivelse": "Ident, authentication service/identification protocol, used by IRC servers to identify users"
   },
   {
-    "navn": 113,
+    "navn": "113",
     "beskrivelse": "Authentication Service (auth), the predecessor to identification protocol. Used to determine a user's identity of a particular TCP connection."
   },
   {
-    "navn": 115,
+    "navn": "115",
     "beskrivelse": "Simple File Transfer Protocol"
   },
   {
-    "navn": 117,
+    "navn": "117",
     "beskrivelse": "UUCP Mapping Project (path service)[citation needed]"
   },
   {
-    "navn": 118,
+    "navn": "118",
     "beskrivelse": "Structured Query Language (SQL) Services[jargon]"
   },
   {
-    "navn": 119,
+    "navn": "119",
     "beskrivelse": "Network News Transfer Protocol (NNTP), retrieval of newsgroup messages"
   },
   {
-    "navn": 123,
+    "navn": "123",
     "beskrivelse": "Network Time Protocol (NTP), used for time synchronization"
   },
   {
-    "navn": 126,
+    "navn": "126",
     "beskrivelse": "Formerly Unisys Unitary Login, renamed by Unisys to NXEdit. Used by Unisys Programmer's Workbench for Clearpath MCP, an IDE for Unisys MCP software development"
   },
   {
-    "navn": 135,
+    "navn": "135",
     "beskrivelse": "DCE endpoint resolution"
   },
   {
-    "navn": 135,
+    "navn": "135",
     "beskrivelse": "Microsoft EPMAP (End Point Mapper), also known as DCE/RPC Locator service, used to remotely manage services including DHCP server, DNS server and WINS. Also used by DCOM"
   },
   {
-    "navn": 137,
+    "navn": "137",
     "beskrivelse": "NetBIOS Name Service, used for name registration and resolution"
   },
   {
-    "navn": 138,
+    "navn": "138",
     "beskrivelse": "NetBIOS Datagram Service"
   },
   {
-    "navn": 139,
+    "navn": "139",
     "beskrivelse": "NetBIOS Session Service"
   },
   {
-    "navn": 143,
+    "navn": "143",
     "beskrivelse": "Internet Message Access Protocol (IMAP), management of electronic mail messages on a server"
   },
   {
-    "navn": 151,
+    "navn": "151",
     "beskrivelse": "HEMS"
   },
   {
-    "navn": 152,
+    "navn": "152",
     "beskrivelse": "Background File Transfer Program (BFTP)[importance?]"
   },
   {
-    "navn": 153,
+    "navn": "153",
     "beskrivelse": "Simple Gateway Monitoring Protocol (SGMP), a protocol for remote inspection and alteration of gateway management information"
   },
   {
-    "navn": 156,
+    "navn": "156",
     "beskrivelse": "Structured Query Language (SQL) Service[jargon]"
   },
   {
-    "navn": 158,
+    "navn": "158",
     "beskrivelse": "Distributed Mail System Protocol (DMSP, sometimes referred to as Pcmail)[importance?]"
   },
   {
-    "navn": 161,
+    "navn": "161",
     "beskrivelse": "Simple Network Management Protocol (SNMP)[citation needed]"
   },
   {
-    "navn": 162,
+    "navn": "162",
     "beskrivelse": "Simple Network Management Protocol Trap (SNMPTRAP)[citation needed]"
   },
   {
-    "navn": 165,
+    "navn": "165",
     "beskrivelse": "Xerox"
   },
   {
-    "navn": 169,
+    "navn": "169",
     "beskrivelse": "SEND"
   },
   {
-    "navn": 170,
+    "navn": "170",
     "beskrivelse": "Network PostScript print server"
   },
   {
-    "navn": 177,
+    "navn": "177",
     "beskrivelse": "X Display Manager Control Protocol (XDMCP), used for remote logins to an X Display Manager server[self-published source]"
   },
   {
-    "navn": 179,
+    "navn": "179",
     "beskrivelse": "Border Gateway Protocol (BGP), used to exchange routing and reachability information among autonomous systems (AS) on the Internet"
   },
   {
-    "navn": 180,
+    "navn": "180",
     "beskrivelse": "ris"
   },
   {
-    "navn": 194,
+    "navn": "194",
     "beskrivelse": "Internet Relay Chat (IRC)"
   },
   {
-    "navn": 199,
+    "navn": "199",
     "beskrivelse": "SNMP Unix Multiplexer (SMUX)"
   },
   {
-    "navn": 201,
+    "navn": "201",
     "beskrivelse": "AppleTalk Routing Maintenance"
   },
   {
-    "navn": 209,
+    "navn": "209",
     "beskrivelse": "Quick Mail Transfer Protocol[self-published source]"
   },
   {
-    "navn": 210,
+    "navn": "210",
     "beskrivelse": "ANSI Z39.50"
   },
   {
-    "navn": 213,
+    "navn": "213",
     "beskrivelse": "Internetwork Packet Exchange (IPX)"
   },
   {
-    "navn": 218,
+    "navn": "218",
     "beskrivelse": "Message posting protocol (MPP)"
   },
   {
-    "navn": 220,
+    "navn": "220",
     "beskrivelse": "Internet Message Access Protocol (IMAP), version 3"
   },
   {
-    "navn": 241,
+    "navn": "241",
     "beskrivelse": ""
   },
   {
-    "navn": 255,
+    "navn": "255",
     "beskrivelse": ""
   },
   {
-    "navn": 259,
+    "navn": "259",
     "beskrivelse": "Efficient Short Remote Operations (ESRO)"
   },
   {
-    "navn": 262,
+    "navn": "262",
     "beskrivelse": "Arcisdms"
   },
   {
-    "navn": 264,
+    "navn": "264",
     "beskrivelse": "Border Gateway Multicast Protocol (BGMP)"
   },
   {
-    "navn": 280,
+    "navn": "280",
     "beskrivelse": "http-mgmt"
   },
   {
-    "navn": 300,
+    "navn": "300",
     "beskrivelse": "ThinLinc Web Access"
   },
   {
-    "navn": 308,
+    "navn": "308",
     "beskrivelse": "Novastor Online Backup"
   },
   {
-    "navn": 311,
+    "navn": "311",
     "beskrivelse": "macOS Server Admin (officially AppleShare IP Web administration)"
   },
   {
-    "navn": 312,
+    "navn": "312",
     "beskrivelse": "macOS Xsan administration"
   },
   {
-    "navn": 318,
+    "navn": "318",
     "beskrivelse": "PKIX Time Stamp Protocol (TSP)"
   },
   {
-    "navn": 319,
+    "navn": "319",
     "beskrivelse": "Precision Time Protocol (PTP) event messages"
   },
   {
-    "navn": 320,
+    "navn": "320",
     "beskrivelse": "Precision Time Protocol (PTP) general messages"
   },
   {
-    "navn": 350,
+    "navn": "350",
     "beskrivelse": "Mapping of Airline Traffic over Internet Protocol (MATIP) type A"
   },
   {
-    "navn": 351,
+    "navn": "351",
     "beskrivelse": "MATIP type B"
   },
   {
-    "navn": 356,
+    "navn": "356",
     "beskrivelse": "cloanto-net-1 (used by Cloanto Amiga Explorer and VMs)"
   },
   {
-    "navn": 366,
+    "navn": "366",
     "beskrivelse": "On-Demand Mail Relay (ODMR)"
   },
   {
-    "navn": 369,
+    "navn": "369",
     "beskrivelse": "Rpc2portmap"
   },
   {
-    "navn": 370,
+    "navn": "370",
     "beskrivelse": "codaauth2, Coda authentication server"
   },
   {
-    "navn": 370,
+    "navn": "370",
     "beskrivelse": "securecast1, outgoing packets to NAI's SecureCast serversAs of 2000[update]"
   },
   {
-    "navn": 371,
+    "navn": "371",
     "beskrivelse": "ClearCase albd"
   },
   {
-    "navn": 376,
+    "navn": "376",
     "beskrivelse": "Amiga Envoy Network Inquiry Protocol"
   },
   {
-    "navn": 383,
+    "navn": "383",
     "beskrivelse": "HP data alarm manager"
   },
   {
-    "navn": 384,
+    "navn": "384",
     "beskrivelse": "A Remote Network Server System"
   },
   {
-    "navn": 387,
+    "navn": "387",
     "beskrivelse": "AURP (AppleTalk Update-based Routing Protocol)"
   },
   {
-    "navn": 388,
+    "navn": "388",
     "beskrivelse": "Unidata LDM near real-time data distribution protocol[self-published source][self-published source]"
   },
   {
-    "navn": 389,
+    "navn": "389",
     "beskrivelse": "Lightweight Directory Access Protocol (LDAP)"
   },
   {
-    "navn": 399,
+    "navn": "399",
     "beskrivelse": "Digital Equipment Corporation DECnet+ (Phase V) over TCP/IP (RFC1859)"
   },
   {
-    "navn": 401,
+    "navn": "401",
     "beskrivelse": "Uninterruptible power supply (UPS)"
   },
   {
-    "navn": 427,
+    "navn": "427",
     "beskrivelse": "Service Location Protocol (SLP)"
   },
   {
-    "navn": 433,
+    "navn": "433",
     "beskrivelse": "NNTP, part of Network News Transfer Protocol"
   },
   {
-    "navn": 434,
+    "navn": "434",
     "beskrivelse": "Mobile IP Agent (RFC 5944)"
   },
   {
-    "navn": 443,
+    "navn": "443",
     "beskrivelse": "Hypertext Transfer Protocol Secure (HTTPS) uses TCP in versions 1.x and 2. HTTP/3 uses QUIC, a transport protocol on top of UDP."
   },
   {
-    "navn": 444,
+    "navn": "444",
     "beskrivelse": "Simple Network Paging Protocol (SNPP), RFC 1568"
   },
   {
-    "navn": 445,
+    "navn": "445",
     "beskrivelse": "Microsoft-DS (Directory Services) Active Directory, Windows shares"
   },
   {
-    "navn": 445,
+    "navn": "445",
     "beskrivelse": "Microsoft-DS (Directory Services) SMB file sharing"
   },
   {
-    "navn": 464,
+    "navn": "464",
     "beskrivelse": "Kerberos Change/Set password"
   },
   {
-    "navn": 465,
+    "navn": "465",
     "beskrivelse": "SMTP over implicit SSL (obsolete)"
   },
   {
-    "navn": 465,
+    "navn": "465",
     "beskrivelse": "URL Rendezvous Directory for Cisco SSM (primary usage assignment)"
   },
   {
-    "navn": 465,
+    "navn": "465",
     "beskrivelse": "Authenticated SMTP over TLS/SSL (SMTPS) (alternative usage assignment)"
   },
   {
-    "navn": 475,
+    "navn": "475",
     "beskrivelse": "tcpnethaspsrv, Aladdin Knowledge Systems Hasp services"
   },
   {
-    "navn": 490,
+    "navn": "490",
     "beskrivelse": "Centro Software ERP ports"
   },
   {
-    "navn": 491,
+    "navn": "491",
     "beskrivelse": "GO-Global remote access and application publishing software"
   },
   {
-    "navn": 497,
+    "navn": "497",
     "beskrivelse": "Retrospect"
   },
   {
-    "navn": 500,
+    "navn": "500",
     "beskrivelse": "Internet Security Association and Key Management Protocol (ISAKMP) / Internet Key Exchange (IKE)"
   },
   {
-    "navn": 502,
+    "navn": "502",
     "beskrivelse": "Modbus Protocol"
   },
   {
-    "navn": 504,
+    "navn": "504",
     "beskrivelse": "Citadel, multiservice protocol for dedicated clients for the Citadel groupware system"
   },
   {
-    "navn": 510,
+    "navn": "510",
     "beskrivelse": "FirstClass Protocol (FCP), used by FirstClass client/server groupware system"
   },
   {
-    "navn": 512,
+    "navn": "512",
     "beskrivelse": "Rexec, Remote Process Execution"
   },
   {
-    "navn": 512,
+    "navn": "512",
     "beskrivelse": "comsat, together with biff"
   },
   {
-    "navn": 513,
+    "navn": "513",
     "beskrivelse": "rlogin"
   },
   {
-    "navn": 513,
+    "navn": "513",
     "beskrivelse": "Who"
   },
   {
-    "navn": 514,
+    "navn": "514",
     "beskrivelse": "Remote Shell, used to execute non-interactive commands on a remote system (Remote Shell, rsh, remsh)"
   },
   {
-    "navn": 514,
+    "navn": "514",
     "beskrivelse": "Syslog, used for system logging"
   },
   {
-    "navn": 515,
+    "navn": "515",
     "beskrivelse": "Line Printer Daemon (LPD), print service"
   },
   {
-    "navn": 517,
+    "navn": "517",
     "beskrivelse": "Talk"
   },
   {
-    "navn": 518,
+    "navn": "518",
     "beskrivelse": "NTalk"
   },
   {
-    "navn": 520,
+    "navn": "520",
     "beskrivelse": "efs, extended file name server"
   },
   {
-    "navn": 520,
+    "navn": "520",
     "beskrivelse": "Routing Information Protocol (RIP)"
   },
   {
-    "navn": 521,
+    "navn": "521",
     "beskrivelse": "Routing Information Protocol Next Generation (RIPng)"
   },
   {
-    "navn": 524,
+    "navn": "524",
     "beskrivelse": "NetWare Core Protocol (NCP) is used for a variety things such as access to primary NetWare server resources, Time Synchronization, etc."
   },
   {
-    "navn": 525,
+    "navn": "525",
     "beskrivelse": "Timed, Timeserver"
   },
   {
-    "navn": 530,
+    "navn": "530",
     "beskrivelse": "Remote procedure call (RPC)"
   },
   {
-    "navn": 532,
+    "navn": "532",
     "beskrivelse": "netnews"
   },
   {
-    "navn": 533,
+    "navn": "533",
     "beskrivelse": "netwall, for emergency broadcasts"
   },
   {
-    "navn": 540,
+    "navn": "540",
     "beskrivelse": "Unix-to-Unix Copy Protocol (UUCP)"
   },
   {
-    "navn": 542,
+    "navn": "542",
     "beskrivelse": "commerce (Commerce Applications)"
   },
   {
-    "navn": 543,
+    "navn": "543",
     "beskrivelse": "klogin, Kerberos login"
   },
   {
-    "navn": 544,
+    "navn": "544",
     "beskrivelse": "kshell, Kerberos Remote shell"
   },
   {
-    "navn": 546,
+    "navn": "546",
     "beskrivelse": "DHCPv6 client"
   },
   {
-    "navn": 547,
+    "navn": "547",
     "beskrivelse": "DHCPv6 server"
   },
   {
-    "navn": 548,
+    "navn": "548",
     "beskrivelse": "Apple Filing Protocol (AFP) over TCP"
   },
   {
-    "navn": 550,
+    "navn": "550",
     "beskrivelse": "new-rwho, new-who"
   },
   {
-    "navn": 554,
+    "navn": "554",
     "beskrivelse": "Real Time Streaming Protocol (RTSP)"
   },
   {
-    "navn": 556,
+    "navn": "556",
     "beskrivelse": "Remotefs, RFS, rfs_server"
   },
   {
-    "navn": 560,
+    "navn": "560",
     "beskrivelse": "rmonitor, Remote Monitor"
   },
   {
-    "navn": 561,
+    "navn": "561",
     "beskrivelse": "monitor"
   },
   {
-    "navn": 563,
+    "navn": "563",
     "beskrivelse": "NNTP over TLS/SSL (NNTPS)"
   },
   {
-    "navn": 564,
+    "navn": "564",
     "beskrivelse": "9P (Plan 9)"
   },
   {
-    "navn": 585,
+    "navn": "585",
     "beskrivelse": "Previously assigned for use of Internet Message Access Protocol over TLS/SSL (IMAPS), now deregistered in favour of port 993."
   },
   {
-    "navn": 587,
+    "navn": "587",
     "beskrivelse": "email message submission (SMTP)"
   },
   {
-    "navn": 591,
+    "navn": "591",
     "beskrivelse": "FileMaker 6.0 (and later) Web Sharing (HTTP Alternate, also see port 80)"
   },
   {
-    "navn": 593,
+    "navn": "593",
     "beskrivelse": "HTTP RPC Ep Map, Remote procedure call over Hypertext Transfer Protocol, often used by Distributed Component Object Model services and Microsoft Exchange Server"
   },
   {
-    "navn": 601,
+    "navn": "601",
     "beskrivelse": "Reliable Syslog Service — used for system logging"
   },
   {
-    "navn": 604,
+    "navn": "604",
     "beskrivelse": "TUNNEL profile, a protocol for BEEP peers to form an application layer tunnel"
   },
   {
-    "navn": 623,
+    "navn": "623",
     "beskrivelse": "ASF Remote Management and Control Protocol (ASF-RMCP) & IPMI Remote Management Protocol"
   },
   {
-    "navn": 625,
+    "navn": "625",
     "beskrivelse": "Open Directory Proxy (ODProxy)"
   },
   {
-    "navn": 631,
+    "navn": "631",
     "beskrivelse": "Internet Printing Protocol (IPP)"
   },
   {
-    "navn": 631,
+    "navn": "631",
     "beskrivelse": "Common Unix Printing System (CUPS) administration console (extension to IPP)"
   },
   {
-    "navn": 635,
+    "navn": "635",
     "beskrivelse": "RLZ DBase"
   },
   {
-    "navn": 636,
+    "navn": "636",
     "beskrivelse": "Lightweight Directory Access Protocol over TLS/SSL (LDAPS)"
   },
   {
-    "navn": 639,
+    "navn": "639",
     "beskrivelse": "Multicast Source Discovery Protocol, MSDP"
   },
   {
-    "navn": 641,
+    "navn": "641",
     "beskrivelse": "SupportSoft Nexus Remote Command (control/listening), a proxy gateway connecting remote control traffic"
   },
   {
-    "navn": 643,
+    "navn": "643",
     "beskrivelse": "SANity"
   },
   {
-    "navn": 646,
+    "navn": "646",
     "beskrivelse": "Label Distribution Protocol (LDP), a routing protocol used in MPLS networks"
   },
   {
-    "navn": 647,
+    "navn": "647",
     "beskrivelse": "DHCP Failover protocol"
   },
   {
-    "navn": 648,
+    "navn": "648",
     "beskrivelse": "Registry Registrar Protocol (RRP)"
   },
   {
-    "navn": 651,
+    "navn": "651",
     "beskrivelse": "IEEE-MMS"
   },
   {
-    "navn": 653,
+    "navn": "653",
     "beskrivelse": "SupportSoft Nexus Remote Command (data), a proxy gateway connecting remote control traffic"
   },
   {
-    "navn": 654,
+    "navn": "654",
     "beskrivelse": "Media Management System (MMS) Media Management Protocol (MMP)"
   },
   {
-    "navn": 655,
+    "navn": "655",
     "beskrivelse": "Tinc VPN daemon"
   },
   {
-    "navn": 657,
+    "navn": "657",
     "beskrivelse": "IBM RMC (Remote monitoring and Control) protocol, used by System p5 AIX Integrated Virtualization Manager (IVM) and Hardware Management Console to connect managed logical partitions (LPAR) to enable dynamic partition reconfiguration"
   },
   {
-    "navn": 660,
+    "navn": "660",
     "beskrivelse": "macOS Server administration, version 10.4 and earlier"
   },
   {
-    "navn": 666,
+    "navn": "666",
     "beskrivelse": "Doom, the first online first-person shooter"
   },
   {
-    "navn": 666,
+    "navn": "666",
     "beskrivelse": "airserv-ng, aircrack-ng's server for remote-controlling wireless devices"
   },
   {
-    "navn": 674,
+    "navn": "674",
     "beskrivelse": "Application Configuration Access Protocol (ACAP)"
   },
   {
-    "navn": 688,
+    "navn": "688",
     "beskrivelse": "REALM-RUSD (ApplianceWare Server Appliance Management Protocol)"
   },
   {
-    "navn": 690,
+    "navn": "690",
     "beskrivelse": "Velneo Application Transfer Protocol (VATP)"
   },
   {
-    "navn": 691,
+    "navn": "691",
     "beskrivelse": "MS Exchange Routing"
   },
   {
-    "navn": 694,
+    "navn": "694",
     "beskrivelse": "Linux-HA high-availability heartbeat"
   },
   {
-    "navn": 695,
+    "navn": "695",
     "beskrivelse": "IEEE Media Management System over SSL (IEEE-MMS-SSL)"
   },
   {
-    "navn": 698,
+    "navn": "698",
     "beskrivelse": "Optimized Link State Routing (OLSR)"
   },
   {
-    "navn": 700,
+    "navn": "700",
     "beskrivelse": "Extensible Provisioning Protocol (EPP), a protocol for communication between domain name registries and registrars (RFC 5734)"
   },
   {
-    "navn": 701,
+    "navn": "701",
     "beskrivelse": "Link Management Protocol (LMP), a protocol that runs between a pair of nodes and is used to manage traffic engineering (TE) links"
   },
   {
-    "navn": 702,
+    "navn": "702",
     "beskrivelse": "IRIS (Internet Registry Information Service) over BEEP (Blocks Extensible Exchange Protocol) (RFC 3983)"
   },
   {
-    "navn": 706,
+    "navn": "706",
     "beskrivelse": "Secure Internet Live Conferencing (SILC)"
   },
   {
-    "navn": 711,
+    "navn": "711",
     "beskrivelse": "Cisco Tag Distribution Protocol—being replaced by the MPLS Label Distribution Protocol"
   },
   {
-    "navn": 712,
+    "navn": "712",
     "beskrivelse": "Topology Broadcast based on Reverse-Path Forwarding routing protocol (TBRPF"
   },
   {
-    "navn": 749,
+    "navn": "749",
     "beskrivelse": "Kerberos administration"
   },
   {
-    "navn": 750,
+    "navn": "750",
     "beskrivelse": "kerberos-iv, Kerberos version IV"
   },
   {
-    "navn": 751,
+    "navn": "751",
     "beskrivelse": "kerberos_master, Kerberos authentication"
   },
   {
-    "navn": 752,
+    "navn": "752",
     "beskrivelse": "passwd_server, Kerberos password (kpasswd) server"
   },
   {
-    "navn": 753,
+    "navn": "753",
     "beskrivelse": "Reverse Routing Header (RRH)"
   },
   {
-    "navn": 753,
+    "navn": "753",
     "beskrivelse": "userreg_server, Kerberos userreg server"
   },
   {
-    "navn": 754,
+    "navn": "754",
     "beskrivelse": "tell send"
   },
   {
-    "navn": 754,
+    "navn": "754",
     "beskrivelse": "krb5_prop, Kerberos v5 slave propagation"
   },
   {
-    "navn": 760,
+    "navn": "760",
     "beskrivelse": "krbupdate [kreg], Kerberos registration"
   },
   {
-    "navn": 782,
+    "navn": "782",
     "beskrivelse": "Conserver serial-console management server"
   },
   {
-    "navn": 783,
+    "navn": "783",
     "beskrivelse": "SpamAssassin spamd daemon"
   },
   {
-    "navn": 800,
+    "navn": "800",
     "beskrivelse": "mdbs-daemon"
   },
   {
-    "navn": 802,
+    "navn": "802",
     "beskrivelse": "MODBUS/TCP Security"
   },
   {
-    "navn": 808,
+    "navn": "808",
     "beskrivelse": "Microsoft Net.TCP Port Sharing Service"
   },
   {
-    "navn": 829,
+    "navn": "829",
     "beskrivelse": "Certificate Management Protocol"
   },
   {
-    "navn": 830,
+    "navn": "830",
     "beskrivelse": "NETCONF over SSH"
   },
   {
-    "navn": 831,
+    "navn": "831",
     "beskrivelse": "NETCONF over BEEP"
   },
   {
-    "navn": 832,
+    "navn": "832",
     "beskrivelse": "NETCONF for SOAP over HTTPS"
   },
   {
-    "navn": 833,
+    "navn": "833",
     "beskrivelse": "NETCONF for SOAP over BEEP"
   },
   {
-    "navn": 843,
+    "navn": "843",
     "beskrivelse": "Adobe Flash"
   },
   {
-    "navn": 847,
+    "navn": "847",
     "beskrivelse": "DHCP Failover protocol"
   },
   {
-    "navn": 848,
+    "navn": "848",
     "beskrivelse": "Group Domain Of Interpretation (GDOI) protocol"
   },
   {
-    "navn": 853,
+    "navn": "853",
     "beskrivelse": "DNS over TLS (RFC 7858)"
   },
   {
-    "navn": 853,
+    "navn": "853",
     "beskrivelse": "DNS over QUIC or DNS over DTLS"
   },
   {
-    "navn": 860,
+    "navn": "860",
     "beskrivelse": "iSCSI (RFC 3720)"
   },
   {
-    "navn": 861,
+    "navn": "861",
     "beskrivelse": "OWAMP control (RFC 4656)"
   },
   {
-    "navn": 862,
+    "navn": "862",
     "beskrivelse": "TWAMP control (RFC 5357)"
   },
   {
-    "navn": 873,
+    "navn": "873",
     "beskrivelse": "rsync file synchronization protocol"
   },
   {
-    "navn": 888,
+    "navn": "888",
     "beskrivelse": "cddbp, CD DataBase (CDDB) protocol (CDDBP)"
   },
   {
-    "navn": 888,
+    "navn": "888",
     "beskrivelse": "IBM Endpoint Manager Remote Control"
   },
   {
-    "navn": 897,
+    "navn": "897",
     "beskrivelse": "Brocade SMI-S RPC"
   },
   {
-    "navn": 898,
+    "navn": "898",
     "beskrivelse": "Brocade SMI-S RPC SSL"
   },
   {
-    "navn": 902,
+    "navn": "902",
     "beskrivelse": "VMware ESXi"
   },
   {
-    "navn": 903,
+    "navn": "903",
     "beskrivelse": "VMware ESXi"
   },
   {
-    "navn": 953,
+    "navn": "953",
     "beskrivelse": "BIND remote name daemon control (RNDC)"
   },
   {
-    "navn": 981,
+    "navn": "981",
     "beskrivelse": "Remote HTTPS management for firewall devices running embedded Check Point VPN-1 software"
   },
   {
-    "navn": 987,
+    "navn": "987",
     "beskrivelse": "Sony PlayStation Wake On Lan"
   },
   {
-    "navn": 987,
+    "navn": "987",
     "beskrivelse": "Microsoft Remote Web Workplace, a feature of Windows Small Business Server"
   },
   {
-    "navn": 988,
+    "navn": "988",
     "beskrivelse": "Lustre (file system) Protocol (data)."
   },
   {
-    "navn": 989,
+    "navn": "989",
     "beskrivelse": "FTPS Protocol (data), FTP over TLS/SSL"
   },
   {
-    "navn": 990,
+    "navn": "990",
     "beskrivelse": "FTPS Protocol (control), FTP over TLS/SSL"
   },
   {
-    "navn": 991,
+    "navn": "991",
     "beskrivelse": "Netnews Administration System (NAS)"
   },
   {
-    "navn": 992,
+    "navn": "992",
     "beskrivelse": "Telnet protocol over TLS/SSL"
   },
   {
-    "navn": 993,
+    "navn": "993",
     "beskrivelse": "Internet Message Access Protocol over TLS/SSL (IMAPS)"
   },
   {
-    "navn": 994,
+    "navn": "994",
     "beskrivelse": "Previously assigned to Internet Relay Chat over TLS/SSL (IRCS), but was not used in common practice."
   },
   {
-    "navn": 995,
+    "navn": "995",
     "beskrivelse": "Post Office Protocol 3 over TLS/SSL (POP3S)"
   },
   {
-    "navn": 1010,
+    "navn": "1010",
     "beskrivelse": "ThinLinc web-based administration interface"
   },
   {
-    "navn": 1020,
+    "navn": "1020",
     "beskrivelse": ""
   },
   {
-    "navn": 1023,
+    "navn": "1023",
     "beskrivelse": ""
   },
   {
-    "navn": 1023,
+    "navn": "1023",
     "beskrivelse": "z/OS Network File System (NFS) (potentially ports 991–1023)"
   }
 ]
