@@ -6,10 +6,13 @@ For å komme i gang og kjøre prosjektet lokalt så følger du disse trinnene.
 ### Forutsetninger
 
 Prosjektet er under utvikling, dermed er det veldig viktig å sjekke om alt du trenger er installert.
-For å gjøre det enklest mulig så trenger du bare å skrive følgende på kommando-linjen med pip
+Du må ha Python3 installert og den nyeste Python3 pip. Installeringen under gjelder for Ubuntu basert datamaskiner.
 
 ```sh
-pip install -e .
+sudo apt update -y
+sudo apt install python3-pip -y
+sudo -H pip install --upgrade pip
+sudo apt install git -y
 ```
 
 ### Installering
@@ -19,11 +22,21 @@ pip install -e .
    git clone https://github.com/Krissolberg/bachelor-python-backend.git
    ```
 2. Legg til API-key fra [Shodan](https://account.shodan.io/) i [shodanService](backend/apiExtentions/shodanGetService.py)
-3. Kjør webserveren
+3. Kjør [installDocker.sh](docker/installDocker.sh)
+   ```sh
+   sudo su
+   chmod 700 docker/installDocker.sh
+   ./docker/installDocker.sh -y
+   ```
+4. Initialiser databasen
+   ```sh
+   sudo docker compose -f docker/docker-compose.yml up -d
+   ```
+5. Kjør webserveren
    ```sh
    uvicorn main:app
    ```
-4. Sjekk dokumentasjonen i [webserveren](http://127.0.0.1:8000/docs)
+6. Sjekk dokumentasjonen i [webserveren](http://127.0.0.1:8000/docs)
 
 #### Alternativ kjøring av webserver
 * ```sh

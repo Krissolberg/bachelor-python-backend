@@ -1,5 +1,6 @@
 import multiprocessing
 
+import pymongo
 import shodan
 
 import backend.apiExtentions.shodanDataFilter as shodanFilter
@@ -9,8 +10,11 @@ import backend.apiExtentions.shodanGetService as shodanGet
 import time
 import json
 
+
 def keyVerifier():
     return shodanGet.verifyKey()
+
+
 def sok(inndata):
     # inndata er et array, denne kan inneholde både URL, IP og IP-range
 
@@ -55,14 +59,17 @@ def sok(inndata):
     result = [searchresult, hostresult]
     return result
 
+
 def dnsSok(domain):
     return backend.apiExtentions.shodanGetService.shodanDNS(domain)
 
-# print(json.dumps(data3, indent=6))
-if __name__ == "__main__":
-    tic = time.perf_counter()
-    #print(json.dumps(sok(['org:"Politiets IKT-tjenester (PIT)"']), indent=6))
-    print(json.dumps(backend.apiExtentions.shodanGetService.shodanDNS('politiet.no'), indent=6))
-    tok = time.perf_counter()
-    print(f'Det tok {tok - tic:0.4f} sekunder')
 
+# print(json.dumps(data3, indent=6))
+#if __name__ == "__main__":
+    # tic = time.perf_counter()
+    # print(json.dumps(sok(['org:"Politiets IKT-tjenester (PIT)"']), indent=6))
+    # print(json.dumps(backend.apiExtentions.shodanGetService.shodanDNS('politiet.no'), indent=6))
+    # tok = time.perf_counter()
+    # print(f'Det tok {tok - tic:0.4f} sekunder')
+    #client = pymongo.MongoClient("0.0.0.0")
+    #print(client.server_info())

@@ -12,7 +12,7 @@ db.portBes.insertMany([
   },
   {
     port: '80',
-    filter: 'noe annet',
+    beskrivelse: 'noe annet',
     addrs: 'mer info?'
   }
 ]);

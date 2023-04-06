@@ -2,7 +2,8 @@ import shodan
 import backend.apiExtentions.shodanDataFilter as shodanFilter
 from backend import cacheService
 
-auth = "wqBocETm9zujq2lWjSaYFUOFBhXDqeHV"
+auth = ""
+
 
 def shodanSearch(indata):
     ip, org = [], []
@@ -62,6 +63,7 @@ def shodanHost(ips):
     except:
         raise SystemError("noresult")
 
+
 def shodanDNS(domain):
     try:
         data = shodan.Shodan(auth).dns.domain_info(domain=domain, history=False, type=None, page=1)
@@ -69,8 +71,10 @@ def shodanDNS(domain):
     except:
         raise SystemError("Fant ingen DNS, fungerer API-key?")
 
+
 def verifyKey():
     try:
-        return shodan.Shodan(auth).info()
+        return cacheService.nosession.get(f'https://api.shodan.io/api-info?key={auth}', timeout=3,
+                                          headers={'Cache-Control': 'no-cache, no-store'}).json()
     except:
         return "Finner ingen Auth-key, har du lagt inn en fungerende Shodan API-key?"

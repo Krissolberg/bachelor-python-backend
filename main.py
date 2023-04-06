@@ -2,6 +2,21 @@ from typing import List
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import backend.shodanFunc as sho
+import backend.databaseFunc as dat
+
+description = """
+Backend for Bachelorprosjektet.
+
+## Shodan
+Ikke glem å sette inn API-nøkkel før du fortsetter!!
+
+Prøv med *keyverifier* om API-nøkkelen fungerer!
+
+NB: Sjekk at MongoDB kjører, hvis den ikke gjør vil ingen API kall untatt *keyverifier* fungere!
+
+## MongoDB
+Her har vi ulike DB funksjoner
+"""
 
 tags_metadata = [
     {
@@ -13,6 +28,10 @@ tags_metadata = [
         },
     },
     {
+        "name": "mongodb",
+        "description": "Operations with the database"
+    },
+    {
         "name": "profile",
         "description": "Login/Register/Forgot"
     },
@@ -22,7 +41,11 @@ tags_metadata = [
     },
 ]
 
-app = FastAPI(openapi_tags=tags_metadata)
+app = FastAPI(
+    title='Bachelor Backend',
+    description=description,
+    version='0.0.1',
+    openapi_tags=tags_metadata)
 
 origins = ["*"]
 
@@ -39,9 +62,11 @@ app.add_middleware(
 def root():
     return "Good day, sir!"
 
+
 @app.get("/shodankeyverifier", tags=["shodan"])
 def verify_shodan_key():
     return sho.keyVerifier()
+
 
 @app.get("/search", tags=["shodan"])
 async def shodan_search(url_ip: List[str] = Query(...)):
@@ -59,9 +84,64 @@ async def single_search(url_ip: str = Query(...)):
 async def org_search(org: str = Query(...)):
     return sho.sok([f'org:"{org}"'])
 
+
 @app.get("/dnssearch", tags=["shodan"])
 async def dns_search(dns: str = Query(...)):
     return sho.dnsSok(dns)
+
+
+# ------------------------------------------------------------------------#
+
+@app.get("/db/verifier", tags=["mongodb"])
+async def verify_database_status():
+    return dat.verifyConnection()
+
+
+@app.get("/db/getDBs", tags=["mongodb"])
+async def get_db():
+    return dat.getDatabases()
+
+
+@app.get("/db/getCol", tags=["mongodb"])
+async def get_col(db: str = Query(...)):
+    return dat.getCol(db)
+
+
+@app.get("/db/getData", tags=["mongodb"])
+async def get_data(db: str = Query(...), col: str = Query(...)):
+    return dat.getDataCol(db, col)
+
+
+@app.get("/db/findDocu", tags=["mongodb"])
+async def find_docu(db: str = Query(...), navn: str = Query(...)):
+    return dat.findDocu(db, navn)
+
+
+@app.post("/db/insertOne", tags=["mongodb"])
+async def insertOne(db: str = Query(...), col: str = Query(...), navn: str = Query(...), beskrivelse: str = Query(...)):
+    return dat.insertOne(db, col, navn, beskrivelse)
+
+
+@app.post("/db/insertMany", tags=["mongodb"])
+async def insertMany(db: str = Query(...), col: str = Query(...), navn: List[str] = Query(...),
+                     beskrivelse: List[str] = Query(...)):
+    for x in range(len(navn)):
+        try:
+            beskrivelse[x]
+            dat.insertOne(db, col, navn[x], beskrivelse[x])
+            return "Lagt til dataen som ikke fantes fra før av."
+        except IndexError:
+            dat.insertOne(db, col, navn[x], "")
+
+
+@app.put("/db/updateOne", tags=["mongodb"])
+async def updateOne(db: str = Query(...), col: str = Query(...), navn: str = Query(...), beskrivelse: str = Query(...)):
+    return dat.updateOne(db, col, navn, beskrivelse)
+
+
+@app.delete("/db/deleteOne", tags=["mongodb"])
+async def deleteOne(db: str = Query(...), col: str = Query(...), navn: str = Query(...)):
+    return dat.deleteOne(db, col, navn)
 
 
 # ------------------------------------------------------------------------#

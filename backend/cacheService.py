@@ -17,3 +17,8 @@ session = CachedSession(
     allowable_codes=[200, 404],
     match_headers=True
 )
+
+nosession = CachedSession(
+    use_cache_dir=False,
+    cache_control=True,
+)
