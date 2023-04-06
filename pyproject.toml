@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 name = "bachelorbackend"
 authors = [{name = "Sufi"}]
 description = "noe"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 version = "1.1.1"
 dependencies = [
         'fastAPI',
@@ -17,6 +17,7 @@ dependencies = [
         'python-dotenv',
         'pymongo',
         'requests_cache',
-        'uvicorn'
+        'uvicorn',
+        'gunicorn'
         ]
 

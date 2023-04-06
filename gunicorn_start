@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DIR=/home/s351869/bachelor-python-backend
+VENV=$DIR/.venv/bin/activate
+
+cd $DIR
+source $VENV
+
+exec gunicorn main:app \
+  --name bachelor-backend \
+  --workers 3 \
+  --worker-class uvicorn.workers.UvicornWorker \
+  --bind= unix:$DIR/run/gunicorn.sock \
+  --log-level=error \
+  --log-file=-
