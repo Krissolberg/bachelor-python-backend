@@ -1,35 +1,19 @@
+const ports = require('port.json');
+const versi = require('versTekst.json');
+const vuln = require('vulns.json');
+const leder = require('leder.json');
+
 db = db.getSiblingDB('info_db');
 
 db.createCollection('portBes');
-db.createCollection('versionsBes');
-db.createCollection('vulnsBes');
+db.createCollection('versionBes');
+db.createCollection('vulnBes');
+db.createCollection('lederTekst');
 
-db.portBes.insertMany([
- {
-    port: '8080',
-    beskrivelse: 'noe',
-    addrs: 'mer info?'
-  },
-  {
-    port: '80',
-    beskrivelse: 'noe annet',
-    addrs: 'mer info?'
-  }
-]);
+db.portBes.insertMany(ports);
 
-db.versionsBes.insertMany([
- {
-    port: '-TLSv1',
-    beskrivelse: 'noe',
-    addrs: 'mer info?'
-  }
-]);
+db.versionBes.insertMany(versi);
 
-db.vulnsBes.insertMany([
- {
-    port: 'CVE',
-    beskrivelse: 'noe',
-    addrs: 'mer info?'
-  }
-]);
+db.vulnBes.insertMany(vuln);
 
+db.lederTekst.insertMany(leder);

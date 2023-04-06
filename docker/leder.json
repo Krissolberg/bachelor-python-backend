@@ -1,0 +1,22 @@
+[
+    {
+        "navn": "tls",
+        "beskrivelse": "TLS er protokollen som krypterer internett trafikken, altså gjør den uleselig for de parter som ikke skal ha den. Dette er viktig da når trafikken sendes på nettet kan “hvem som helst” som trafikken går gjennom kan lese trafikken I tillegg vil denne trafikken lagres hos veldig mange, både legitime og illegitime aktører, dermed er det ikke heldig at de kan lese alt som kommuniseres over internett, spesielt sensitive data."
+    },
+    {
+        "navn": "port",
+        "beskrivelse": "Porter er det som lar en servere/datamaskin vite hvilket program du prøver å sende dataen din til, siden det ikke er ønsket at hvem som helst, kan nå hva som helst, så ønsker man å stenge de portene som ikke må være åpne. Når det er sagt så er det en nødvendighet å ha porter åpne for at de skal være tilgjengelig, som f.eks. at folk skal kunne sende epost, så må porten for epost være åpen. Med andre ord er dette et balansespill mellom å være tilgjengelig samtidig som man ønsker å minimere eksponering. Det finnes noen porter som er mer utsatte enn andre, og noen som aldri burde være åpne i det hele tatt, dette prøver vi å utdype litt mer her, samtidig som vi ønsker å informere om hva dere eksponerer: "
+    },
+    {
+        "navn": "cve",
+        "beskrivelse": "CVE er et annet ord for sårbarheter i programvare. Ved å se på hvilken programvare dere kjører på deres tjenester, så kan vi si noen om vi tror vi tror dere har kjente sårbarheter på systemer som er knyttet til gammel programvare. At vi ser CVEer hos dere betyr altså at dere burde oppdatere disse systemene, ved siden av CVEene vi finner så vil det stå en score fra 0 til 10 hvor 10 er mest alvorlig. Scoren er regnet ut ved hjelp av å se hvor lett den er å utnytte, og hvor stor konsekvens det er hvis noen utnytter sårbarheten. Vi har også linket til en liten tekstlig beskrivelse som sier hva sårbarheten går ut på. Det som er ekstra viktig å tenke på her, er at informasjonene om at dere er sårbare for disse sårbarhetene er offentlig tilgengelig informasjon for alle, og kan derfor veldig enkelt utnyttes av ondsinnede aktører."
+    },
+    {
+        "navn": "ipv6",
+        "beskrivelse": "I dag så bruker vi 2 versjoner av IP-adresser. IPv4 er den gamle versjonen hvor vi blant annet har problemet med at det ikke finnes nok IP adresser til alle datamaskiner, samt en del andre. Av den grunn har IPv6 blitt introdusert og er den nye standarden. Vi er at dere ikke tilbyr IPv6 som er uheldig, da det gjør det vanskeligere for brukere å nå dere, samtidig som man har utdatert infrastruktur som ikke kan nyte av fordelene av IPv6. I tillegg er det i Norge i dag krav om at alle i det offentlige må tilby IPv6, så om du er offentlig etat er det et lovbrudd og ikke ha dette, samtidig som det gir et signal til alle andre om at dette er noe som burde være på plass."
+    },
+    {
+        "navn": "",
+        "beskrivelse": ""
+    }
+]
