@@ -8,11 +8,5 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-
-#Web interface for MongoDB
-  mongo-express:
-    image: mongo-express:0.54
-    restart: always
-    ports:
-      - "8081:8081"
+      - ./init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+      - ./data:/tmp/data
