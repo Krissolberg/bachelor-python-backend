@@ -45,21 +45,20 @@ def iprangesplitter(fra, til):
     return split
 
 
-def getBesDB(ports):
+def getBesDB(inn):
     dbFact = {}
-    if ports == "Not found":
+    if inn == "Not found":
         return dbFact
-    for x in ports:
+    for x in inn:
         if not isinstance(x, str):
             x = str(x)
-        if x != "Not found":
-            dbChecker = dbFunc.findDocu('info_db', x)
-            if dbChecker:
-                for key1, value1 in dbChecker.items():
-                    try:
-                        dbFact[value1['navn']] = value1['beskrivelse']
-                    except:
-                        dbFact[str(x)] = "Feil i db"
-            else:
-                dbFact[str(x)] = "Ingen info i db"
+        dbChecker = dbFunc.findDocu('info_db', x)
+        if dbChecker:
+            for key, value in dbChecker.items():
+                try:
+                    dbFact[value['navn']] = value['beskrivelse']
+                except:
+                    dbFact[str(x)] = "Feil i db"
+        else:
+            dbFact[str(x)] = "Ingen info i db"
     return dbFact

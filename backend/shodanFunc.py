@@ -58,20 +58,20 @@ def sok(inndata):
         for key, value in hostresult[x].items():
             if value == "No result":
                 continue
-            ports=value['ports']
-            versions=value['versions']
-            vulns=value['vulns']
+            ports = value['ports']
+            versions = value['versions']
+            vulns = value['vulns']
 
-            portBes=shodanFilter.getBesDB(ports)
-            versionBes=shodanFilter.getBesDB(versions)
+            portBes = shodanFilter.getBesDB(ports)
+            versionBes = shodanFilter.getBesDB(versions)
             vulnsBes = shodanFilter.getBesDB(vulns)
 
             if portBes:
-                value['ports']=portBes
+                value['ports'] = portBes
             if versionBes:
-                value['versions']=versionBes
+                value['versions'] = versionBes
             if vulnsBes:
-                value['vulns']=vulnsBes
+                value['vulns'] = vulnsBes
 
     result = [searchresult, hostresult]
 
@@ -81,13 +81,14 @@ def sok(inndata):
 def dnsSok(domain):
     return shodanGet.shodanDNS(domain)
 
+
 # print(json.dumps(data3, indent=6))
-if __name__ == "__main__":
-    #print(sok(["politiet.no"]))
+#if __name__ == "__main__":
+    # print(sok(["politiet.no"]))
     # tic = time.perf_counter()
-    print(json.dumps(sok(["politiet.no"]), indent=6))
+    # print(json.dumps(sok(["politiet.no"]), indent=6))
     # print(json.dumps(backend.apiExtentions.shodanGetService.shodanDNS('politiet.no'), indent=6))
     # tok = time.perf_counter()
     # print(f'Det tok {tok - tic:0.4f} sekunder')
-    #client = pymongo.MongoClient("0.0.0.0")
-    #print(client.server_info())
+    # client = pymongo.MongoClient("0.0.0.0")
+    # print(client.server_info())

@@ -10,6 +10,7 @@ exec gunicorn main:app \
   --name bachelor-backend \
   --workers 3 \
   --worker-class uvicorn.workers.UvicornWorker \
+  --timeout 300 \
   --bind=unix:$DIR/run/gunicorn.sock \
   --log-level=error \
   --log-file=-
