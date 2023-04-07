@@ -55,7 +55,7 @@ def getBesDB(ports):
             if dbChecker:
                 for key1, value1 in dbChecker.items():
                     try:
-                        dbFact[value1['navn']] = value1['bes']
+                        dbFact[value1['navn']] = value1['beskrivelse']
                     except:
                         dbFact[str(x)] = "Feil i db"
             else:
