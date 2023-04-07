@@ -2,7 +2,8 @@ import shodan
 import backend.apiExtentions.shodanDataFilter as shodanFilter
 from backend import cacheService
 
-auth = ""
+
+auth = "wqBocETm9zujq2lWjSaYFUOFBhXDqeHV"
 
 
 def shodanSearch(indata):
@@ -52,7 +53,7 @@ def shodanHost(ips):
                                  'os': host['os'],
                                  'hostnames': host['hostnames'],
                                  'domains': host['domains'],
-                                 'port': port,
+                                 'ports': host['ports'],
                                  'versions': versions,
                                  'cipher': cipher,
                                  'vulns': vulns}}

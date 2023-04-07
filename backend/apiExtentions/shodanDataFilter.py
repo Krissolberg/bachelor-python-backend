@@ -1,6 +1,8 @@
 import ipaddress
 import re
 
+import backend.databaseFunc as dbFunc
+
 
 def filterUrlIp(array):
     iprange = []
@@ -41,3 +43,18 @@ def iprangesplitter(fra, til):
     for j in range(intRange + 1):
         split.append(str(ipaddress.ip_address(int(ipaddress.ip_address(fra)) + j)))
     return split
+
+
+def getBesDB(ports):
+    dbFact = {}
+    for x in ports:
+        if not isinstance(x, str):
+            x = str(x)
+        if x != "Not found":
+            dbChecker = dbFunc.findDocu('info_db', x)
+            if dbChecker:
+                for key1, value1 in dbChecker.items():
+                    dbFact[value1['navn']] = value1['bes']
+            else:
+                dbFact[str(x)] = "Ingen info i db"
+    return dbFact

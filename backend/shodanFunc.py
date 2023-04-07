@@ -1,10 +1,8 @@
 import multiprocessing
 
-import pymongo
 import shodan
 
 import backend.apiExtentions.shodanDataFilter as shodanFilter
-import backend.apiExtentions.shodanGetService
 import backend.apiExtentions.shodanGetService as shodanGet
 
 import time
@@ -56,18 +54,38 @@ def sok(inndata):
             except SystemError:
                 hostresult.append({i: 'No result'})
 
+    for x in range(len(hostresult)):
+        for key, value in hostresult[x].items():
+            if value == "No result":
+                continue
+            ports=value['ports']
+            versions=value['versions']
+            vulns=value['vulns']
+
+            portBes=shodanFilter.getBesDB(ports)
+            versionBes=shodanFilter.getBesDB([versions])
+            vulnsBes = shodanFilter.getBesDB([vulns])
+
+            if portBes:
+                value['ports']=portBes
+            if versionBes:
+                value['versions']=versionBes
+            if vulnsBes:
+                value['vulns']=vulnsBes
+
     result = [searchresult, hostresult]
+
     return result
 
 
 def dnsSok(domain):
-    return backend.apiExtentions.shodanGetService.shodanDNS(domain)
-
+    return shodanGet.shodanDNS(domain)
 
 # print(json.dumps(data3, indent=6))
-#if __name__ == "__main__":
+if __name__ == "__main__":
+    #print(sok(["politiet.no"]))
     # tic = time.perf_counter()
-    # print(json.dumps(sok(['org:"Politiets IKT-tjenester (PIT)"']), indent=6))
+    print(json.dumps(sok(["politiet.no"]), indent=6))
     # print(json.dumps(backend.apiExtentions.shodanGetService.shodanDNS('politiet.no'), indent=6))
     # tok = time.perf_counter()
     # print(f'Det tok {tok - tic:0.4f} sekunder')

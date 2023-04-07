@@ -19,6 +19,8 @@ session = CachedSession(
 )
 
 nosession = CachedSession(
+    'shodan_cache',
+    backend='mongodb',
     use_cache_dir=False,
     cache_control=True,
 )
