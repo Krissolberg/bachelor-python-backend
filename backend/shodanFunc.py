@@ -63,8 +63,8 @@ def sok(inndata):
             vulns=value['vulns']
 
             portBes=shodanFilter.getBesDB(ports)
-            versionBes=shodanFilter.getBesDB([versions])
-            vulnsBes = shodanFilter.getBesDB([vulns])
+            versionBes=shodanFilter.getBesDB(versions)
+            vulnsBes = shodanFilter.getBesDB(vulns)
 
             if portBes:
                 value['ports']=portBes

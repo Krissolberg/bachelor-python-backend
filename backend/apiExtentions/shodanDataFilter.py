@@ -47,6 +47,8 @@ def iprangesplitter(fra, til):
 
 def getBesDB(ports):
     dbFact = {}
+    if ports == "Not found":
+        return dbFact
     for x in ports:
         if not isinstance(x, str):
             x = str(x)
