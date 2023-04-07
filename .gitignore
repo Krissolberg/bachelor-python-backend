@@ -2,7 +2,7 @@
 *.sqlite
 .env
 *.py[cod]
-
+*.log
 *.sw[a-z]
 venv/
 
