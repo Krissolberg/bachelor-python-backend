@@ -54,7 +54,10 @@ def getBesDB(ports):
             dbChecker = dbFunc.findDocu('info_db', x)
             if dbChecker:
                 for key1, value1 in dbChecker.items():
-                    dbFact[value1['navn']] = value1['bes']
+                    try:
+                        dbFact[value1['navn']] = value1['bes']
+                    except:
+                        dbFact[str(x)] = "Feil i db"
             else:
                 dbFact[str(x)] = "Ingen info i db"
     return dbFact
