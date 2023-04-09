@@ -29,7 +29,11 @@ tags_metadata = [
     },
     {
         "name": "mongodb",
-        "description": "Operations with the database"
+        "description": "Operations with the database",
+        "externalDocs": {
+            "description": "Link to offical PyMongo Doc",
+            "url": "https://pymongo.readthedocs.io/en/stable/"
+        },
     },
     {
         "name": "profile",
@@ -125,13 +129,7 @@ async def insertOne(db: str = Query(...), col: str = Query(...), navn: str = Que
 @app.post("/db/insertMany", tags=["mongodb"])
 async def insertMany(db: str = Query(...), col: str = Query(...), navn: List[str] = Query(...),
                      beskrivelse: List[str] = Query(...)):
-    for x in range(len(navn)):
-        try:
-            beskrivelse[x]
-            dat.insertOne(db, col, navn[x], beskrivelse[x])
-            return "Lagt til dataen som ikke fantes fra før av."
-        except IndexError:
-            dat.insertOne(db, col, navn[x], "")
+    return dat.insertMany(db, col, navn, beskrivelse)
 
 
 @app.put("/db/updateOne", tags=["mongodb"])

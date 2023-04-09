@@ -9,7 +9,7 @@ def verifyConnection():
         with pymongo.timeout(5):
             return client.server_info()
     except:
-        return "Kunne ikke koble til database"
+        return "Kunne ikke koble til database."
 
 
 def getDatabases():
@@ -17,7 +17,7 @@ def getDatabases():
         with pymongo.timeout(5):
             return client.list_database_names()
     except:
-        return "Kunne ikke koble til database"
+        return "Kunne ikke koble til database."
 
 
 def getCol(db):
@@ -25,7 +25,7 @@ def getCol(db):
         dbCheck.dbExist(db)
         return client[db].list_collection_names()
     except:
-        return "Kunne ikke koble til database"
+        return "Kunne ikke koble til database."
 
 
 def getDataCol(db, col):
@@ -33,10 +33,10 @@ def getDataCol(db, col):
         if not dbCheck.dbExist(db):
             return "Databasen eksisterer ikke."
         if not dbCheck.dbColExist(db, col):
-            return "Collection eksisterer ikke"
+            return "Collection eksisterer ikke."
         return list(client[db][col].find({}, {"_id": 0}))
     except:
-        return "Noe gikk galt"
+        return "Noe gikk galt."
 
 
 def findDocu(db, navn):
@@ -50,7 +50,7 @@ def findDocu(db, navn):
                 arr[i] = ea
         return arr
     except:
-        return "Noe gikk galt i søkingen"
+        return "Noe gikk galt i søkingen."
 
 
 def insertOne(db, col, navn, bes):
@@ -70,7 +70,18 @@ def insertOne(db, col, navn, bes):
             upsert=True)
         return f'La inn {navn}: {bes} i {col}'
     except:
-        return "Database og Collection eksisterer, men kunne ikke legge inn data"
+        return "Database og Collection eksisterer, men kunne ikke legge inn data."
+
+
+def insertMany(db, col, navn, beskrivelse):
+    for x in range(len(navn)):
+        try:
+            beskrivelse[x]
+            insertOne(db, col, navn[x], beskrivelse[x])
+            return "Lagt inn dataen som ikke fantes fra før."
+        except IndexError:
+            insertOne(db, col, navn[x], "")
+            return "Lagt inn data uten beskrivelse."
 
 
 def updateOne(db, col, navn, bes):
@@ -89,7 +100,7 @@ def updateOne(db, col, navn, bes):
             })
         return f'Oppdaterte {navn}: {bes} i {col}'
     except:
-        return "Noe gikk galt.."
+        return "Noe gikk galt."
 
 
 def deleteOne(db, col, navn):
@@ -97,10 +108,10 @@ def deleteOne(db, col, navn):
         if not dbCheck.dbExist(db):
             return "Databasen eksisterer ikke."
         if not dbCheck.dbColExist(db, col):
-            return "Collection eksisterer ikke"
+            return "Collection eksisterer ikke."
         if not dbCheck.dbColDocuExist(db, col, navn):
             return "Dataen eksisterer ikke."
         client[db][col].delete_one({'navn': navn})
         return f'Slettet {navn} fra {col} i {db}'
     except:
-        return "Noe gikk galt.."
+        return "Noe gikk galt."
