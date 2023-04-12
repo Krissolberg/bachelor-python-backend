@@ -16,6 +16,16 @@ def shoSok(inndata):
     # Initialiserer multiprocessing. Her har jeg valgt å ha 8 workers
     pool = Pool(processes=8)
 
+    # Lager individuell ip for range, og legger det i ip-array med multiprosessing
+    for i in range(len(iprangesplit)):
+        try:
+            processes = pool.apply_async(func=iprangesplitter, args=(iprangesplit[i]))
+            ip.extend(processes.get())
+        except:
+            print("no")
+
+    print(ip)
+
     # Gjør en shodanSearch på Url, og legger funnet IP til IP-arrayet
     # Det gjøres en sortering og
     searchresult = []
@@ -30,14 +40,6 @@ def shoSok(inndata):
             ipUrl.extend(quicksortIP(temp[i]['ip']))
         except APIError:
             return 'Invalid API key or you do not have access to use APIfilters in Shodan'
-
-    # Lager individuell ip for range, og legger det i ip-array med multiprosessing
-    for i in range(len(iprangesplit)):
-        try:
-            processes = pool.apply_async(func=iprangesplitter, args=(iprangesplit[i]))
-            insort(ip, processes.get())
-        except:
-            print("no")
 
     # Gjør en fullstendig søk på hver IP og skriver ut ønsket data med multiprosessing
     # Alle IP-ene blir også lagret i cache
