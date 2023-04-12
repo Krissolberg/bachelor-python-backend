@@ -69,11 +69,10 @@ def getBesDB(inn, col):
             x = str(x)
         dbChecker = dbFunc.findOne('info_db', x, col)
         if dbChecker:
-            for key, value in dbChecker.items():
-                try:
-                    dbFact[value['navn']] = value['bes']
-                except:
-                    dbFact[str(x)] = "Feil i db"
+            try:
+                dbFact[dbChecker['navn']] = dbChecker['bes']
+            except:
+                dbFact[str(x)] = "Feil i db"
         else:
             dbFact[str(x)] = "Ingen info i db"
     return dbFact
