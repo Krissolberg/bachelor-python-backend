@@ -85,9 +85,13 @@ def checkDB(hostresult):
             if versions != "Not found":
                 for x in versions:
                     version.update({f'{x}': version.get(f'{x}', 0) + 1})
+            else:
+                version.update({'Not found': version.get('Not found', 0) + 1})
             if vulns != "Not found":
                 for x in vulns:
                     vuln.update({f'{x}': vuln.get(f'{x}', 0) + 1})
+            else:
+                vuln.update({'Not found': vuln.get('Not found', 0) + 1})
 
             if portBes:
                 value['ports'] = portBes

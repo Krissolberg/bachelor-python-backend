@@ -1,9 +1,6 @@
 from backend.apiExtentions.shodanGetService import verifyKey, shodanDNS
 from backend.apiExtentions.shodanSok import shoSok
 
-import time
-import json
-
 
 def keyVerifier():
     return verifyKey()
