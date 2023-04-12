@@ -50,6 +50,7 @@ def shoSok(inndata):
     # Alle IP-ene blir også lagret i cache
     hostresult = []
     if len(ip) > 0:
+        ip = quicksortIP(ip)
         for i in ip:
             processes = pool.apply_async(func=shodanHost, args=[i])
             try:
