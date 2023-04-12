@@ -1,17 +1,26 @@
+import re
+
 import shodan
 import backend.apiExtentions.shodanDataFilter as shodanFilter
 from backend import cacheService
-
 
 auth = "wqBocETm9zujq2lWjSaYFUOFBhXDqeHV"
 
 
 def shodanSearch(indata):
     ip, org = [], []
+    limit = 200
+    counter = 0
+    results = []
 
-    results = shodan.Shodan(auth).search(indata)
+    for banner in shodan.Shodan(auth).search_cursor(indata):
 
-    for result in results['matches']:
+        results.append(banner)
+        counter += 1
+        if counter >= limit:
+            break
+
+    for result in results:
         try:
             ip.append(result['ip_str'])
         except:
@@ -21,9 +30,9 @@ def shodanSearch(indata):
         except:
             break
 
-    data = {indata: {'result': results['total'],
-                     'ip': ip,
-                     'org': org}}
+    data = {indata: {
+        'ip': ip,
+        'org': org}}
 
     return data
 
@@ -37,7 +46,10 @@ def shodanHost(ips):
         for item in host['data']:
             port = item['port']
             try:
-                versions = item['ssl']['versions']
+                versions = []
+                temp = item['ssl']['versions']
+                for i in temp:
+                    versions.append(re.sub(r'-', '', i, count=1))
             except:
                 versions = "Not found"
             try:
@@ -45,7 +57,7 @@ def shodanHost(ips):
             except:
                 cipher = "Not found"
             try:
-                vulns = shodanFilter.getVulns(host['data'])
+                vulns = item['opts']['vulns']
             except:
                 vulns = "Not found"
 
@@ -57,8 +69,6 @@ def shodanHost(ips):
                                  'versions': versions,
                                  'cipher': cipher,
                                  'vulns': vulns}}
-
-        # print(json.dumps(data, indent=6))
 
         return data
     except:

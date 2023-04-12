@@ -53,6 +53,15 @@ def findDocu(db, navn):
         return "Noe gikk galt i søkingen."
 
 
+def findOne(db, navn, col):
+    try:
+        if not dbCheck.dbExist(db):
+            return "Databasen eksisterer ikke."
+        return client[db][col].find_one({'navn': navn}, {'_id': 0})
+    except:
+        return "Noe gikk galt i søkingen."
+
+
 def insertOne(db, col, navn, bes):
     try:
         if not dbCheck.dbExist(db):
@@ -73,11 +82,11 @@ def insertOne(db, col, navn, bes):
         return "Database og Collection eksisterer, men kunne ikke legge inn data."
 
 
-def insertMany(db, col, navn, beskrivelse):
+def insertMany(db, col, navn, bes):
     for x in range(len(navn)):
         try:
-            beskrivelse[x]
-            insertOne(db, col, navn[x], beskrivelse[x])
+            bes[x]
+            insertOne(db, col, navn[x], bes[x])
             return "Lagt inn dataen som ikke fantes fra før."
         except IndexError:
             insertOne(db, col, navn[x], "")

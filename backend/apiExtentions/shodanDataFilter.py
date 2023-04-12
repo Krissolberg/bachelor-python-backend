@@ -22,21 +22,6 @@ def filterUrlIp(array):
     return [iprange, iprangesplit, ip]
 
 
-def getVulns(data):
-    vulns = []
-
-    for item in data:
-        for i in item:
-            if i == 'vulns':
-                if len(vulns) == 0:
-                    vulns.append(item[i])
-                else:
-                    if item[i] not in vulns:
-                        vulns.append(item[i])
-
-    return vulns[0]
-
-
 def iprangesplitter(fra, til):
     split = []
     intRange = ((int(ipaddress.ip_address(til))) - int(ipaddress.ip_address(fra)))
@@ -45,20 +30,89 @@ def iprangesplitter(fra, til):
     return split
 
 
-def getBesDB(inn):
+def quicksort(array):
+    min, lik, stor = [], [], []
+
+    if len(array) > 1:
+        pivot = array[0]
+        for x in array:
+            if x < pivot:
+                min.append(x)
+            elif x == pivot:
+                lik.append(x)
+            elif x > pivot:
+                stor.append(x)
+        return quicksort(min) + lik + quicksort(stor)
+    else:
+        return array
+
+
+def quicksortIP(array):
+    intArray, strArray = [], []
+
+    for i in array:
+        tempInt = int(ipaddress.ip_address(i))
+        if tempInt not in intArray:
+            intArray.append(tempInt)
+    intArray = quicksort(intArray)
+    for i in intArray:
+        strArray.append(str(ipaddress.ip_address(i)))
+    return strArray
+
+
+def getBesDB(inn, col):
     dbFact = {}
     if inn == "Not found":
         return dbFact
     for x in inn:
         if not isinstance(x, str):
             x = str(x)
-        dbChecker = dbFunc.findDocu('info_db', x)
+        dbChecker = dbFunc.findOne('info_db', x, col)
         if dbChecker:
             for key, value in dbChecker.items():
                 try:
-                    dbFact[value['navn']] = value['beskrivelse']
+                    dbFact[value['navn']] = value['bes']
                 except:
                     dbFact[str(x)] = "Feil i db"
         else:
             dbFact[str(x)] = "Ingen info i db"
     return dbFact
+
+
+def checkDB(hostresult):
+    port = {}
+    version = {}
+    vuln = {}
+    for x in range(len(hostresult)):
+        for key, value in hostresult[x].items():
+            if value == "No result":
+                continue
+            ports = value['ports']
+            versions = value['versions']
+            vulns = value['vulns']
+
+            portBes = getBesDB(ports, 'portBes')
+            versionBes = getBesDB(versions, 'versionsBes')
+            vulnsBes = getBesDB(vulns, 'vulnsBes')
+
+            for x in ports:
+                port.update({'total': port.get('total', 0) + 1})
+                port.update({f'{x}': port.get(f'{x}', 0) + 1})
+            if versions != "Not found":
+                for x in versions:
+                    version.update({f'{x}': version.get(f'{x}', 0) + 1})
+            if vulns != "Not found":
+                for x in vulns:
+                    vuln.update({f'{x}': vuln.get(f'{x}', 0) + 1})
+
+            if portBes:
+                value['ports'] = portBes
+            if versionBes:
+                value['versions'] = versionBes
+            if vulnsBes:
+                value['vulns'] = vulnsBes
+    stat = {'stats': {'ports': port, 'versions': version, 'vulns': vuln}}
+    return hostresult, stat
+
+
+

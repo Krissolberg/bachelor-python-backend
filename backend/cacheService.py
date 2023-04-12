@@ -12,7 +12,7 @@ session = CachedSession(
     backend='mongodb',
     use_cache_dir=True,
     cache_control=True,
-    expire_after=timedelta(days=1),
+    expire_after=timedelta(days=14),
     allowable_methods=['GET'],
     allowable_codes=[200, 404],
     match_headers=True
