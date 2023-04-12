@@ -1,8 +1,7 @@
-import requests_cache
-from requests_cache import CachedSession
+from requests_cache import CachedSession, install_cache
 from datetime import timedelta
 
-requests_cache.install_cache(
+install_cache(
     'shodan_cache',
     backend="mongodb"
     )

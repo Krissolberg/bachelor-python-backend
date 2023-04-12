@@ -1,12 +1,13 @@
-import pymongo
+from pymongo import timeout
 import backend.apiExtentions.databaseCheck as dbCheck
+from backend.apiExtentions.databaseCheck import mongoClient
 
-client = dbCheck.mongoClient()
+client = mongoClient()
 
 
 def verifyConnection():
     try:
-        with pymongo.timeout(5):
+        with timeout(5):
             return client.server_info()
     except:
         return "Kunne ikke koble til database."
@@ -14,7 +15,7 @@ def verifyConnection():
 
 def getDatabases():
     try:
-        with pymongo.timeout(5):
+        with timeout(5):
             return client.list_database_names()
     except:
         return "Kunne ikke koble til database."
@@ -46,8 +47,7 @@ def findDocu(db, navn):
             return "Databasen eksisterer ikke."
         allcol = getCol(db)
         for i in allcol:
-            for ea in client[db][i].find({'navn': navn}, {'_id': 0}):
-                arr[i] = ea
+            arr[i] = [ea for ea in client[db][i].find({'navn': navn}, {'_id': 0})]
         return arr
     except:
         return "Noe gikk galt i søkingen."
@@ -85,7 +85,6 @@ def insertOne(db, col, navn, bes):
 def insertMany(db, col, navn, bes):
     for x in range(len(navn)):
         try:
-            bes[x]
             insertOne(db, col, navn[x], bes[x])
             return "Lagt inn dataen som ikke fantes fra før."
         except IndexError:

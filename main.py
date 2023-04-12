@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-import backend.shodanFunc as sho
-import backend.databaseFunc as dat
+from backend.shodanFunc import keyVerifier, sok, dnsSok
+from backend.databaseFunc import verifyConnection, getDatabases, getCol, getDataCol, findDocu, deleteOne, insertOne, insertMany
 
 description = """
 Backend for Bachelorprosjektet.
@@ -69,77 +69,77 @@ def root():
 
 @app.get("/shodankeyverifier", tags=["shodan"])
 def verify_shodan_key():
-    return sho.keyVerifier()
+    return keyVerifier()
 
 
 @app.get("/search", tags=["shodan"])
 async def shodan_search(url_ip: List[str] = Query(...)):
-    return sho.sok(url_ip)
+    return sok(url_ip)
 
 
 # ... er det samme som Required fra pydantic
 
 @app.get("/single", tags=["shodan"])
 async def single_search(url_ip: str = Query(...)):
-    return sho.sok([url_ip])
+    return sok([url_ip])
 
 
 @app.get("/orgsearch", tags=["shodan"])
 async def org_search(org: str = Query(...)):
-    return sho.sok([f'org:"{org}"'])
+    return sok([f'org:"{org}"'])
 
 
 @app.get("/dnssearch", tags=["shodan"])
 async def dns_search(dns: str = Query(...)):
-    return sho.dnsSok(dns)
+    return dnsSok(dns)
 
 
 # ------------------------------------------------------------------------#
 
 @app.get("/db/verifier", tags=["mongodb"])
 async def verify_database_status():
-    return dat.verifyConnection()
+    return verifyConnection()
 
 
 @app.get("/db/getDBs", tags=["mongodb"])
 async def get_db():
-    return dat.getDatabases()
+    return getDatabases()
 
 
 @app.get("/db/getCol", tags=["mongodb"])
 async def get_col(db: str = Query(...)):
-    return dat.getCol(db)
+    return getCol(db)
 
 
 @app.get("/db/getData", tags=["mongodb"])
 async def get_data(db: str = Query(...), col: str = Query(...)):
-    return dat.getDataCol(db, col)
+    return getDataCol(db, col)
 
 
 @app.get("/db/findDocu", tags=["mongodb"])
 async def find_docu(db: str = Query(...), navn: str = Query(...)):
-    return dat.findDocu(db, navn)
+    return findDocu(db, navn)
 
 
 @app.post("/db/insertOne", tags=["mongodb"])
 async def insertOne(db: str = Query(...), col: str = Query(...), navn: str = Query(...), beskrivelse: str = Query(...)):
-    return dat.insertOne(db, col, navn, beskrivelse)
+    return insertOne(db, col, navn, beskrivelse)
 
 
 @app.post("/db/insertMany", tags=["mongodb"])
 async def insertMany(db: str = Query(...), col: str = Query(...), navn: List[str] = Query(...),
                      beskrivelse: List[str] = Query(...)):
-    return dat.insertMany(db, col, navn, beskrivelse)
+    return insertMany(db, col, navn, beskrivelse)
 
 
 @app.put("/db/updateOne", tags=["mongodb"])
 async def updateOne(db: str = Query(...), col: str = Query(...), navn: str = Query(...), beskrivelse: str = Query(...)):
-    return dat.updateOne(db, col, navn, beskrivelse)
+    return updateOne(db, col, navn, beskrivelse)
 
 
 @app.delete("/db/deleteOne", tags=["mongodb"])
 async def deleteOne(db: str = Query(...), col: str = Query(...), navn: str = Query(...)):
-    return dat.deleteOne(db, col, navn)
+    return deleteOne(db, col, navn)
 
 
 # ------------------------------------------------------------------------#

@@ -1,50 +1,31 @@
 import re
 
-import shodan
-import backend.apiExtentions.shodanDataFilter as shodanFilter
+from shodan import Shodan
 from backend import cacheService
 
 auth = "wqBocETm9zujq2lWjSaYFUOFBhXDqeHV"
 
 
 def shodanSearch(indata):
-    ip, org = [], []
-    limit = 200
-    counter = 0
-    results = []
+    results, limit, counter = [], 200, 0
 
-    for banner in shodan.Shodan(auth).search_cursor(indata):
+    for banner in Shodan(auth).search_cursor(indata):
 
         results.append(banner)
         counter += 1
         if counter >= limit:
             break
 
-    for result in results:
-        try:
-            ip.append(result['ip_str'])
-        except:
-            break
-        try:
-            org.append(result['org'])
-        except:
-            break
-
-    data = {indata: {
-        'ip': ip,
-        'org': org}}
-
-    return data
+    return {indata: {
+        'ip': [result['ip_str'] for result in results],
+        'org': [result['org'] for result in results]}}
 
 
 def shodanHost(ips):
-    global port, versions, cipher, host
     try:
         host = (cacheService.session.get(
             f'https://api.shodan.io/shodan/host/{ips}?key={auth}').json())
-        host['data']
         for item in host['data']:
-            port = item['port']
             try:
                 versions = []
                 temp = item['ssl']['versions']
@@ -61,7 +42,7 @@ def shodanHost(ips):
             except:
                 vulns = "Not found"
 
-        data = {host['ip_str']: {'org': host['org'],
+        return {host['ip_str']: {'org': host['org'],
                                  'os': host['os'],
                                  'hostnames': host['hostnames'],
                                  'domains': host['domains'],
@@ -70,15 +51,13 @@ def shodanHost(ips):
                                  'cipher': cipher,
                                  'vulns': vulns}}
 
-        return data
     except:
         raise SystemError("noresult")
 
 
 def shodanDNS(domain):
     try:
-        data = shodan.Shodan(auth).dns.domain_info(domain=domain, history=False, type=None, page=1)
-        return data
+        return Shodan(auth).dns.domain_info(domain=domain, history=False, type=None, page=1)
     except:
         raise SystemError("Fant ingen DNS, fungerer API-key?")
 
