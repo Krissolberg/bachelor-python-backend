@@ -79,6 +79,9 @@ def checkDB(hostresult):
             portBes = getBesDB(ports, 'portBes')
             versionBes = getBesDB(versions, 'versionsBes')
             vulnsBes = getBesDB(vulns, 'vulnsBes')
+            print(vulnsBes)
+            if vulnsBes == [{}]:
+                vulnsBes = "Not found"
 
             for x in ports:
                 port.update({f'{x}': port.get(f'{x}', 0) + 1})
@@ -93,11 +96,17 @@ def checkDB(hostresult):
             else:
                 vuln.update({'Not found': vuln.get('Not found', 0) + 1})
 
-            if portBes:
+            if portBes == [{}]:
+                value['ports'] = "Not found"
+            else:
                 value['ports'] = portBes
-            if versionBes:
+            if versionBes == [{}]:
+                value['versions'] = "Not found"
+            else:
                 value['versions'] = versionBes
-            if vulnsBes:
+            if vulnsBes == [{}]:
+                value['vulns'] = "Not found"
+            else:
                 value['vulns'] = vulnsBes
     port['total'] = sum(port.values())
     stat = {'stats': {'ports': port, 'versions': version, 'vulns': vuln}}

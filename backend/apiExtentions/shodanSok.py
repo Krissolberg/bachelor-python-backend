@@ -1,8 +1,8 @@
 from shodan import APIError
 from multiprocessing import Pool
-from bisect import insort
 from backend.apiExtentions.shodanDataFilter import filterUrlIp, quicksort, iprangesplitter, quicksortIP, checkDB
 from backend.apiExtentions.shodanGetService import shodanSearch, shodanHost
+
 
 def shoSok(inndata):
     # inndata er et array, denne kan inneholde både URL, IP og IP-range
@@ -23,8 +23,6 @@ def shoSok(inndata):
             ip.extend(processes.get())
         except:
             print("no")
-
-    print(ip)
 
     # Gjør en shodanSearch på Url, og legger funnet IP til IP-arrayet
     # Det gjøres en sortering og

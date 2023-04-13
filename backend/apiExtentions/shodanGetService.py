@@ -39,7 +39,7 @@ def shodanHost(ips):
                 cipher = "Not found"
             try:
                 vulns = item['opts']['vulns']
-                if vulns == []:
+                if not vulns:
                     vulns = "Not found"
             except:
                 vulns = "Not found"
