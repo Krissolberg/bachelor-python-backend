@@ -1,7 +1,7 @@
 import ipaddress
 import re
 
-import backend.databaseFunc as dbFunc
+from backend.databaseFunc import findOne, tls_statement
 
 
 def filterUrlIp(array):
@@ -54,7 +54,7 @@ def getBesDB(inn, col):
     for x in inn:
         if not isinstance(x, str):
             x = str(x)
-        dbChecker = dbFunc.findOne('info_db', x, col)
+        dbChecker = findOne('info_db', x, col)
         if dbChecker:
             try:
                 dbFact[dbChecker['navn']] = dbChecker['bes']
@@ -65,8 +65,25 @@ def getBesDB(inn, col):
     return dbFact
 
 
+def getLederTekstVersion(version):
+    match, eachVersion = {}, []
+    for v in version.keys():
+        if v != "Not found" and v != "tekst":
+            version["tekst"].update({f'{v}': findOne('info_db', v, 'versionBes')})
+            v = v.replace('[', '')
+            v = v.replace("'", '')
+            v = v.replace(']', '')
+            v = v.replace(' ', '')
+            eachVersion.append(v.split(','))
+    for i in range(len(eachVersion)):
+        for j in eachVersion[i]:
+            match.update({f'{j}': match.get(f'{j}', 0) + 1})
+    print(match)
+    return match
+
+
 def checkDB(hostresult):
-    port, portBesTotal, version, vuln = {}, {}, {'tekst': {}}, {}
+    port, portBesTotal, version, vuln, match = {}, {}, {'tekst': {}}, {}, {}
 
     for x in range(len(hostresult)):
         for key, value in hostresult[x].items():
@@ -104,21 +121,7 @@ def checkDB(hostresult):
             else:
                 vuln.update({'Not found': vuln.get('Not found', 0) + 1})
 
-    lederTekst = []
-    for v in version.keys():
-        if v != "Not found" and v != "tekst":
-            version["tekst"].update({f'{v}': dbFunc.findOne('info_db', v, 'versionBes')})
-            v = v.replace('[', '')
-            v = v.replace("'", '')
-            v = v.replace(']', '')
-            v = v.replace(' ', '')
-            lederTekst.append(v.split(','))
-
-    match = {}
-    for i in range(len(lederTekst)):
-        for j in lederTekst[i]:
-            match.update({f'{j}': match.get(f'{j}', 0) + 1})
-    version["tekst"].update({'lederTekst': dbFunc.tls_statement(match)})
+    version["tekst"].update({'lederTekst': tls_statement((getLederTekstVersion(version)))})
 
     port['total'] = sum(port.values())
     port.update({'tekst': portBesTotal})

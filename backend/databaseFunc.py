@@ -126,6 +126,7 @@ def deleteOne(db, col, navn):
 
 
 def tls_statement(versions_count):
+    sumEldre, search = 0, ""
     try:
         tls_1_2 = versions_count['TLSv1.2']
     except:
@@ -134,12 +135,10 @@ def tls_statement(versions_count):
         tls_1_3 = versions_count['TLSv1.3']
     except:
         tls_1_3 = 0
-    sumEldre = 0
     for key, value in versions_count.items():
         if key != "TLSv1.3" and key != "TLSv1.2":
             sumEldre = sumEldre + value
 
-    search = ""
     if tls_1_2 == tls_1_3:
         search = "1.2og1.3"
     elif tls_1_2 and tls_1_3 == 0:
