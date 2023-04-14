@@ -66,57 +66,56 @@ def getBesDB(inn, col):
 
 
 def checkDB(hostresult):
-    port, portBesTotal, version, vuln = {}, {}, {}, {}
+    port, portBesTotal, version, vuln = {}, {}, {'tekst': {}}, {}
 
     for x in range(len(hostresult)):
         for key, value in hostresult[x].items():
             if value == "No result":
                 continue
-            ports = value['ports']
-            versions = value['versions']
-            vulns = value['vulns']
+            ports, versions, vulns = value['ports'], value['versions'], value['vulns']
 
             portBes = getBesDB(ports, 'portBes')
             portBesTotal.update(portBes)
-            versionBes = getBesDB(versions, 'versionsBes')
-            vulnsBes = getBesDB(vulns, 'vulnsBes')
-            if vulnsBes == [{}]:
-                vulnsBes = "Not found"
-
+            if portBes != [{}]:
+                value['ports'] = portBes
+            else:
+                value['ports'] = "Not found"
             for x in ports:
                 port.update({f'{x}': port.get(f'{x}', 0) + 1})
+
+            versionBes = getBesDB(versions, 'versionsBes')
+            if versionBes != [{}]:
+                value['versions'] = versionBes
+            else:
+                value['versions'] = "Not found"
             if versions != "Not found":
                 version.update({f'{versions}': version.get(f'{versions}', 0) + 1})
             else:
                 version.update({'Not found': version.get('Not found', 0) + 1})
 
+            vulnsBes = getBesDB(vulns, 'vulnsBes')
+            if vulnsBes == [{}]:
+                value['vulns'] = "Not found"
+            else:
+                value['vulns'] = vulnsBes
             if vulns != "Not found":
                 for x in vulns:
                     vuln.update({f'{x}': vuln.get(f'{x}', 0) + 1})
             else:
                 vuln.update({'Not found': vuln.get('Not found', 0) + 1})
 
-            if portBes == [{}]:
-                value['ports'] = "Not found"
-            else:
-                value['ports'] = portBes
-            if versionBes == [{}]:
-                value['versions'] = "Not found"
-            else:
-                value['versions'] = versionBes
-            if vulnsBes == [{}]:
-                value['vulns'] = "Not found"
-            else:
-                value['vulns'] = vulnsBes
-    tempVers = {'tekst': {}}
-    for v, r in version.items():
-        if v != "Not found":
-            tempVers['tekst'].update({f'{v}': dbFunc.findOne('info_db', v, 'versionBes')})
-    version.update(tempVers)
-
-
+    for v in version.keys():
+        if v != "Not found" and v != "tekst":
+            version["tekst"].update({f'{v}': dbFunc.findOne('info_db', v, 'versionBes')})
+    try:
+        if version["['TLSv1', 'SSLv2', 'SSLv3', 'TLSv1.1', 'TLSv1.2', 'TLSv1.3']"] > \
+                version["['TLSv1', 'SSLv2', 'SSLv3', 'TLSv1.1', 'TLSv1.2']"]:
+            version["tekst"].update({'lederTekst': "nesten1.3"})
+    except:
+        version["tekst"].update({'lederTekst': "vet ikke"})
 
     port['total'] = sum(port.values())
     port.update({'tekst': portBesTotal})
+
     stat = {'stats': {'ports': port, 'versions': version, 'vulns': vuln}}
     return hostresult, stat
