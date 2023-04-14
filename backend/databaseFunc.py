@@ -148,9 +148,9 @@ def tls_statement(versions_count):
     elif tls_1_2 > tls_1_3:
         search = "1.2noe1.3"
     if sumEldre:
-        sumEldre = (findOne("info_db", 'utdatert', "versionsBes"))['bes']
+        sumEldre = (findOne("info_db", 'utdatert', "versionsBes")['bes'])
 
-    dbBes = findOne("info_db", search, "versionsBes")['bes']
+    dbBes = (findOne("info_db", search, "versionsBes")['bes'])
     if dbBes and sumEldre:
         return dbBes + " " + sumEldre
     else:
