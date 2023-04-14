@@ -2,5 +2,26 @@
  {
     "navn": "-TLSv1",
     "bes": "noe"
+  },
+  {
+    "navn": "utdatert",
+    "bes": "Dere har ingen sikre måter å sikre nettverkstrafikken deres på. Dette betyr i verste fall at av hvem som helst kan lese all trafikken dere sender ut. Protokollene dere bruker fikk erstatning i 2008, og de protokollene dere har har er protokoller som er avviklet da de har store sikkerhetshull. Dette er såklar veldig uheldig og kan føre til informasjon på avveie."
+  },
+  {
+    "navn": "1.2",
+    "bes": "Dere har ikke de nyeste versionen av TLS, TLS1.3. Den nye versionen kom i 2018 og det er derfor noe alle burde ha implementert nå. TLS1.3 er både raskere og sikrere, og den krypterer også metadataen, noe ikke den forrige versionen av TLS gjorde (TLS1.2). Selv om det ikke er en direkte sårbarhet å ikke ha TLS1.3 så kan det bety at folk kan samle inn metadata fra all nettverkstrafikk i tillegg til at det er uheldig å være en bedrift som ikke klarer å tilby standaren innen sikkerhet/personvernsløsninger."
+  },
+  {
+    "navn": "1.3",
+    "bes": "Vi ser at dere har den nyeste versionen av TLS som er veldig bra. Samtidig er det mange klienter som ikke har TLS 1.3, og det er derfor ogå anbefalt og tildby 1.2 for å være tilgjengelig for folk flest."
+  },
+  {
+    "navn": "1.2og1.3",
+    "bes": "Det ser ut til at alle deres tjenester tilbyr de to nyeste versjonene av TLS som er veldig bra."
+  },
+
+  {
+    "navn": "1.2noe1.3",
+    "bes": "Noen av deres systemer er opp til dagens standard, mens noen har ikke nyeste versjonen 1.3. Den nye versionen kom i 2018 og det er derfor noe alle burde ha implementert nå. TLS1.3 er både raskere og sikrere, og den krypterer også metadataen, noe ikke den forrige versionen av TLS gjorde (TLS1.2). Selv om det ikke er en direkte sårbarhet å ikke ha TLS1.3 så kan det bety at folk kan samle inn metadata fra all nettverkstrafikk i tilleg til at det er uheldig å være en bedrift som ikke klarer å tilby standaren innen sikkerhet/personvernsløsninger."
   }
 ]

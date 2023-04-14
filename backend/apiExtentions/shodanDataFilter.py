@@ -104,15 +104,21 @@ def checkDB(hostresult):
             else:
                 vuln.update({'Not found': vuln.get('Not found', 0) + 1})
 
+    lederTekst = []
     for v in version.keys():
         if v != "Not found" and v != "tekst":
             version["tekst"].update({f'{v}': dbFunc.findOne('info_db', v, 'versionBes')})
-    try:
-        if version["['TLSv1', 'SSLv2', 'SSLv3', 'TLSv1.1', 'TLSv1.2', 'TLSv1.3']"] > \
-                version["['TLSv1', 'SSLv2', 'SSLv3', 'TLSv1.1', 'TLSv1.2']"]:
-            version["tekst"].update({'lederTekst': "nesten1.3"})
-    except:
-        version["tekst"].update({'lederTekst': "vet ikke"})
+            v = v.replace('[', '')
+            v = v.replace("'", '')
+            v = v.replace(']', '')
+            v = v.replace(' ', '')
+            lederTekst.append(v.split(','))
+
+    match = {}
+    for i in range(len(lederTekst)):
+        for j in lederTekst[i]:
+            match.update({f'{j}': match.get(f'{j}', 0) + 1})
+    version["tekst"].update({'lederTekst': dbFunc.tls_statement(match)})
 
     port['total'] = sum(port.values())
     port.update({'tekst': portBesTotal})
