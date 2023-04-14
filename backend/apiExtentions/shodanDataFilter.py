@@ -66,7 +66,7 @@ def getBesDB(inn, col):
 
 
 def checkDB(hostresult):
-    port, version, vuln = {}, {}, {}
+    port, portBesTotal, version, vuln = {}, {}, {}, {}
 
     for x in range(len(hostresult)):
         for key, value in hostresult[x].items():
@@ -77,19 +77,19 @@ def checkDB(hostresult):
             vulns = value['vulns']
 
             portBes = getBesDB(ports, 'portBes')
+            portBesTotal.update(portBes)
             versionBes = getBesDB(versions, 'versionsBes')
             vulnsBes = getBesDB(vulns, 'vulnsBes')
-            print(vulnsBes)
             if vulnsBes == [{}]:
                 vulnsBes = "Not found"
 
             for x in ports:
                 port.update({f'{x}': port.get(f'{x}', 0) + 1})
             if versions != "Not found":
-                for x in versions:
-                    version.update({f'{x}': version.get(f'{x}', 0) + 1})
+                version.update({f'{versions}': version.get(f'{versions}', 0) + 1})
             else:
                 version.update({'Not found': version.get('Not found', 0) + 1})
+
             if vulns != "Not found":
                 for x in vulns:
                     vuln.update({f'{x}': vuln.get(f'{x}', 0) + 1})
@@ -108,6 +108,15 @@ def checkDB(hostresult):
                 value['vulns'] = "Not found"
             else:
                 value['vulns'] = vulnsBes
+    tempVers = {'tekst': {}}
+    for v, r in version.items():
+        if v != "Not found":
+            tempVers['tekst'].update({f'{v}': dbFunc.findOne('info_db', v, 'versionBes')})
+    version.update(tempVers)
+
+
+
     port['total'] = sum(port.values())
+    port.update({'tekst': portBesTotal})
     stat = {'stats': {'ports': port, 'versions': version, 'vulns': vuln}}
     return hostresult, stat
