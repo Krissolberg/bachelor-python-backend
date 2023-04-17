@@ -126,7 +126,7 @@ def deleteOne(db, col, navn):
 
 
 def tls_statement(versions_count):
-    sumEldre, search = 0, ""
+    sumEldre, search = False, ""
     try:
         tls_1_2 = versions_count['TLSv1.2']
     except:
@@ -137,7 +137,8 @@ def tls_statement(versions_count):
         tls_1_3 = 0
     for key, value in versions_count.items():
         if key != "TLSv1.3" and key != "TLSv1.2":
-            sumEldre = sumEldre + value
+            sumEldre = True
+            break
 
     if tls_1_2 == tls_1_3:
         search = "1.2og1.3"
@@ -148,10 +149,9 @@ def tls_statement(versions_count):
     elif tls_1_2 > tls_1_3:
         search = "1.2noe1.3"
     if sumEldre:
-        sumEldre = (findOne("info_db", 'utdatert', "versionBes")['bes'])
+        search = search + "utdatert"
 
-    dbBes = (findOne("info_db", search, "versionBes")['bes'])
-    if dbBes and sumEldre:
-        return dbBes + " " + sumEldre
-    else:
-        return sumEldre
+    try:
+        return findOne("info_db", search, "versionBes")['bes']
+    except:
+        return f'Finner ingen beskrivelse på: {search}, i databasen.'
