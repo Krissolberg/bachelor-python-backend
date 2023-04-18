@@ -54,7 +54,7 @@ def getBesDB(inn, col):
     for x in inn:
         if not isinstance(x, str):
             x = str(x)
-        dbChecker = findOne('info_db', x, col)
+        dbChecker = findOne('info_db', "navn", x, col)
         if dbChecker:
             try:
                 dbFact[dbChecker['navn']] = dbChecker['bes']
@@ -69,7 +69,7 @@ def getLederTekstVersion(version):
     match, eachVersion = {}, []
     for v in version.keys():
         if v != "Not found" and v != "tekst":
-            version["tekst"].update({f'{v}': findOne('info_db', v, 'versionBes')})
+            version["tekst"].update({f'{v}': findOne('info_db', "navn", v, 'versionBes')})
             v = v.replace('[', '')
             v = v.replace("'", '')
             v = v.replace(']', '')

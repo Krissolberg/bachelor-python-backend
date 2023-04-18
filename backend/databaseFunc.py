@@ -53,13 +53,33 @@ def findDocu(db, navn):
         return "Noe gikk galt i søkingen."
 
 
-def findOne(db, navn, col):
+def findOne(db, key, navn, col):
     try:
         if not dbCheck.dbExist(db):
             return "Databasen eksisterer ikke."
-        return client[db][col].find_one({'navn': navn}, {'_id': 0})
+        return client[db][col].find_one({f'{key}': navn}, {'_id': 0})
     except:
         return "Noe gikk galt i søkingen."
+
+
+def insertUser(db, col, username, email, passord):
+    try:
+        if not dbCheck.dbExist(db):
+            return "Databasen eksisterer ikke."
+        if not dbCheck.dbColExist(db, col):
+            return "Collection eksisterer ikke."
+        if dbCheck.dbColDocuExist(db, col, "email", email):
+            return "Dataen eksisterer allerede."
+        client[db][col].update_one({
+            'email': email
+        },
+            {
+                '$setOnInsert': {'username': username, 'email': email, 'password': passord, 'token': ""}
+            },
+            upsert=True)
+        return f'La inn {username}: {email} i {col}'
+    except:
+        return "Database og Collection eksisterer, men kunne ikke legge inn data."
 
 
 def insertOne(db, col, navn, bes):
@@ -68,7 +88,7 @@ def insertOne(db, col, navn, bes):
             return "Databasen eksisterer ikke."
         if not dbCheck.dbColExist(db, col):
             return "Collection eksisterer ikke."
-        if dbCheck.dbColDocuExist(db, col, navn):
+        if dbCheck.dbColDocuExist(db, col, "navn", navn):
             return "Dataen eksisterer allerede."
         client[db][col].update_one({
             'navn': navn
@@ -98,7 +118,7 @@ def updateOne(db, col, navn, bes):
             return "Databasen eksisterer ikke."
         if not dbCheck.dbColExist(db, col):
             return "Collection eksisterer ikke."
-        if not dbCheck.dbColDocuExist(db, col, navn):
+        if not dbCheck.dbColDocuExist(db, col, "navn", navn):
             return "Dataen eksisterer ikke."
         client[db][col].update_one({
             'navn': navn
@@ -111,13 +131,32 @@ def updateOne(db, col, navn, bes):
         return "Noe gikk galt."
 
 
+def updateToken(db, col, username, email, password, token):
+    try:
+        if not dbCheck.dbExist(db):
+            return "Databasen eksisterer ikke."
+        if not dbCheck.dbColExist(db, col):
+            return "Collection eksisterer ikke."
+        if not dbCheck.dbColDocuExist(db, col, "email", email):
+            return "Dataen eksisterer ikke."
+        client[db][col].update_one({
+            'email': email
+        },
+            {
+                '$set': {'username': username, 'email': email, 'password': password, 'token': token}
+            })
+        return f'Oppdaterte {username}: {token} i {col}'
+    except:
+        return "Noe gikk galt."
+
+
 def deleteOne(db, col, navn):
     try:
         if not dbCheck.dbExist(db):
             return "Databasen eksisterer ikke."
         if not dbCheck.dbColExist(db, col):
             return "Collection eksisterer ikke."
-        if not dbCheck.dbColDocuExist(db, col, navn):
+        if not dbCheck.dbColDocuExist(db, col, "navn", navn):
             return "Dataen eksisterer ikke."
         client[db][col].delete_one({'navn': navn})
         return f'Slettet {navn} fra {col} i {db}'
@@ -152,6 +191,6 @@ def tls_statement(versions_count):
         search = search + "utdatert"
 
     try:
-        return findOne("info_db", search, "versionBes")['bes']
+        return findOne("info_db", "navn", search, "versionBes")['bes']
     except:
         return f'Finner ingen beskrivelse på: {search}, i databasen.'

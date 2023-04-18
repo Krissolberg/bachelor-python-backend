@@ -3,6 +3,7 @@ from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from backend.shodanFunc import keyVerifier, sok, dnsSok
 from backend.databaseFunc import verifyConnection, getDatabases, getCol, getDataCol, findDocu, deleteOne, insertOne, insertMany
+from backend.auth import createNewUser, userLogin, updateUserPassword, getUserinfo
 
 description = """
 Backend for Bachelorprosjektet.
@@ -143,14 +144,23 @@ async def deleteOne(db: str = Query(...), col: str = Query(...), navn: str = Que
 
 
 # ------------------------------------------------------------------------#
-@app.get("login", tags=["profile"])
-async def login(user: str, pw: str):
-    return None
+@app.get("/login", tags=["profile"])
+async def login(email: str, password: str):
+    return userLogin(email, password)
+
+@app.get("/userinfo", tags=["profile"])
+async def userinfo(token):
+    return getUserinfo(token)
 
 
-@app.post("register", tags=["profile"])
-async def register(user: str, pw: str):
-    return None
+@app.post("/register", tags=["profile"])
+async def register(user:str, email:str, passord:str):
+    return createNewUser(user, email, passord)
+
+@app.put("/updatePassword", tags=["profile"])
+async def updatePassword(email:str, password:str, new_password:str):
+    return updateUserPassword(email, password, new_password)
+
 
 
 @app.get("geturl", tags=["profileData"])

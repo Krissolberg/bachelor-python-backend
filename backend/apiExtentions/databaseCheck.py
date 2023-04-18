@@ -29,12 +29,12 @@ def dbColExist(db, col):
         return False
 
 
-def dbColDocuExist(db, col, navn):
+def dbColDocuExist(db, col, key, navn):
     try:
         with timeout(5):
             dbExist(db)
             dbColExist(db, col)
-            if mongoClient()[db][col].count_documents({'navn': navn}, limit=1) != 0:
+            if mongoClient()[db][col].count_documents({f'{key}': navn}, limit=1) != 0:
                 return True
             else:
                 return False
