@@ -109,7 +109,7 @@ async def getSavedSearch(token: str):
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
 
 
-@app.delete("/removeOneSavedSearch", tags=["profile"])
+@app.delete("/removeSavedSearch", tags=["profile"])
 async def removeSearch(token: str, removeArray: List[str] = Query(...)):
     try:
         return removeSavedSearch(token, removeArray)

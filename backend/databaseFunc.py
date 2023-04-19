@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 
 from pymongo import timeout
 import backend.apiExtentions.databaseCheck as dbCheck
@@ -6,7 +6,7 @@ from backend.apiExtentions.databaseCheck import mongoClient
 
 client = mongoClient()
 
-timestamp = datetime.datetime.utcnow()
+timestamp = datetime.utcnow()
 date = timestamp.strftime("%d-%m-%Y")
 time = timestamp.strftime("%H:%M:%S")
 
@@ -193,8 +193,8 @@ def insertUser(db, col, username, email, password):
             },
             upsert=True)
 
-        client[db]["tokens"].create_index("expiration", expireAfterSeconds=10)
-        client[db]["tokensLong"].create_index("expiration", expireAfterSeconds=6000)
+        client[db]["tokens"].create_index("expiration", expireAfterSeconds=timedelta(hours=12))
+        client[db]["tokensLong"].create_index("expiration", expireAfterSeconds=timedelta(days=2))
 
         return f'La inn {username}: {email} i {col}'
     except:
