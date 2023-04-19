@@ -59,8 +59,8 @@ def root():
 
 
 @app.get("/login", tags=["profile"])
-async def login(email: str, password: str, remember: bool):
-    return userLogin(email, password, remember)
+async def login(emailorusername: str, password: str, remember: bool):
+    return userLogin(emailorusername, password, remember)
 
 
 @app.post("/register", tags=["profile"])

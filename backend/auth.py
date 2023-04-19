@@ -10,21 +10,27 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def createNewUser(username, email, passord):
     if dbColDocuExist("users", "user", "email", email):
         raise HTTPException(status_code=422, detail="User with that e-mail already exists")
+    if dbColDocuExist("users", "user", "username", username):
+        raise HTTPException(status_code=422, detail="User with that username already exists")
 
     return insertUser("users", "user", username, email, bcrypt_context.hash(passord))
 
 
-def userLogin(email: str, password: str, remember: bool):
-    if not dbColDocuExist("users", "user", "email", email):
+def userLogin(emailorusername: str, password: str, remember: bool):
+    if dbColDocuExist("users", "user", "email", emailorusername):
+        key = "email"
+    elif dbColDocuExist("users", "user", "username", emailorusername):
+        key = "username"
+    else:
         raise HTTPException(status_code=401, detail="Invalid credentials. Email not in user")
 
-    user = findOne("users", "email", email, "user")
+    user = findOne("users", key, emailorusername, "user")
 
     if not bcrypt_context.verify(password, user["password"]):
         raise HTTPException(status_code=401, detail="Invalid credentials. Hashed password not userpassword")
 
     token = uuid4()
-    updateToken('users', email, str(token), remember)
+    updateToken('users', emailorusername, str(token), remember)
     return token
 
 
