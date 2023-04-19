@@ -5,7 +5,8 @@ from backend.apiExtentions.shodanSok import shoSearch
 from backend.apiExtentions.shodanGetService import verifyShodanKey, shodanDNS
 from backend.databaseFunc import verifyConnection, getDatabases, getCol, getDataCol, findDocu, deleteOne, insertOne, \
     insertMany
-from backend.auth import createNewUser, userLogin, updateUserPassword, getUserinfo, validToken, updateSavedSearch, removeSavedSearch
+from backend.auth import createNewUser, userLogin, updateUserPassword, getUserinfo, validToken, updateSavedSearch, \
+    removeSavedSearch
 
 description = """
 ## Hvis noe ikke fungerer
@@ -115,7 +116,6 @@ async def removeSearch(token: str, removeArray: List[str] = Query(...)):
         return removeSavedSearch(token, removeArray)
     except:
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
-
 
 
 # ------------------------------------------------------------------------#

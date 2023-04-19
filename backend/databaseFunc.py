@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from pymongo import timeout
 import backend.apiExtentions.databaseCheck as dbCheck
@@ -193,8 +193,8 @@ def insertUser(db, col, username, email, password):
             },
             upsert=True)
 
-        client[db]["tokens"].create_index("expiration", expireAfter=timedelta(hours=12))
-        client[db]["tokensLong"].create_index("expiration", expireAfter=timedelta(days=2))
+        client[db]["tokens"].create_index("expiration", expireAfterSeconds=(60*60*12))
+        client[db]["tokensLong"].create_index("expiration", expireAfterSeconds=(60*60*48))
 
         return f'La inn {username}: {email} i {col}'
     except:
