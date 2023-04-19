@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 from pymongo import timeout
 import backend.apiExtentions.databaseCheck as dbCheck
@@ -6,7 +6,7 @@ from backend.apiExtentions.databaseCheck import mongoClient
 
 client = mongoClient()
 
-timestamp = datetime.utcnow()
+timestamp = datetime.datetime.utcnow()
 date = timestamp.strftime("%d-%m-%Y")
 time = timestamp.strftime("%H:%M:%S")
 
@@ -179,11 +179,13 @@ def findOneWithID(db, key, name, col):
 
 
 def insertUser(db, col, username, email, password):
+    print(1)
     try:
         if not dbCheck.dbExist(db):
             return "Database does not exist."
         if not dbCheck.dbColExist(db, col):
             return "Collection does not exist."
+        print(2)
         client[db][col].update_one({
             'email': email
         },
@@ -192,10 +194,11 @@ def insertUser(db, col, username, email, password):
                                  'savedSearch': []}
             },
             upsert=True)
-
+        print(3)
         client[db]["tokens"].create_index("expiration", expireAfterSeconds=43200)
+        print(4)
         client[db]["tokensLong"].create_index("expiration", expireAfterSeconds=172800)
-
+        print(5)
         return f'La inn {username}: {email} i {col}'
     except:
         return "Something unexpected happened. Database and Collection exists, but could not insert data."

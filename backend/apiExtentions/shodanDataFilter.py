@@ -78,7 +78,6 @@ def getLeaderTextVersion(version):
     for i in range(len(eachVersion)):
         for j in eachVersion[i]:
             match.update({f'{j}': match.get(f'{j}', 0) + 1})
-    print(match)
     return match
 
 
