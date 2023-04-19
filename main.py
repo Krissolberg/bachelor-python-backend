@@ -58,17 +58,6 @@ def root():
     return "Good day, sir!"
 
 
-@app.get("/shodankeyverifier", tags=["shodan"])
-def verify_shodan_key():
-    try:
-        return verifyShodanKey()
-    except:
-        raise HTTPException(status_code=401, detail="Invalid ShodanAPI-key. Could not connect to Shodan.")
-
-
-# ... er det samme som Required fra pydantic
-
-
 @app.get("/login", tags=["profile"])
 async def login(email: str, password: str, remember: bool):
     return userLogin(email, password, remember)
@@ -119,6 +108,17 @@ async def removeSearch(token: str, removeArray: List[str] = Query(...)):
 
 
 # ------------------------------------------------------------------------#
+
+@app.get("/shodankeyverifier", tags=["shodan"])
+def verify_shodan_key():
+    try:
+        return verifyShodanKey()
+    except:
+        raise HTTPException(status_code=401, detail="Invalid ShodanAPI-key. Could not connect to Shodan.")
+
+
+# ... er det samme som Required fra pydantic
+
 
 @app.get("/search", tags=["shodan"])
 async def shodan_search(auth: str, url_ip: List[str] = Query(...)):
