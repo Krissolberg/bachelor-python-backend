@@ -22,12 +22,12 @@ def userLogin(emailorusername: str, password: str, remember: bool):
     elif dbColDocuExist("users", "user", "username", emailorusername):
         key = "username"
     else:
-        raise HTTPException(status_code=401, detail="Invalid credentials. Email not in user")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Email/Username does not exist.")
 
     user = findOne("users", key, emailorusername, "user")
 
     if not bcrypt_context.verify(password, user["password"]):
-        raise HTTPException(status_code=401, detail="Invalid credentials. Hashed password not userpassword")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Wrong password.")
 
     token = uuid4()
     updateToken('users', emailorusername, str(token), remember)
@@ -38,12 +38,12 @@ def updateUserPassword(email: str, password: str, new_password: str) -> str:
     # We use this check to make sure the user exists
     if not dbColDocuExist("users", "user", "email", email):
         # We do not use 404 status code, because then we would reveil who has an account or not
-        raise HTTPException(status_code=401, detail="Invalid credentials. Email not in user")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Email does not exist.")
 
     user = findOne("users", "email", email, "user")
 
     if not bcrypt_context.verify(password, user['password']):
-        raise HTTPException(status_code=401, detail="Invalid credentials. Hashed password not userpassword")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Wrong password.")
 
     return updatePassword(email, bcrypt_context.hash(new_password))
 
