@@ -9,14 +9,14 @@ from backend.auth import createNewUser, userLogin, updateUserPassword, getUserin
     removeSavedSearch
 
 description = """
-## Hvis noe ikke fungerer
-### *Sjekk første funksjon i shodan og mongodb. Hvis en av disse ikke fungerer, så vil ingenting fungere!*
+## If something does not work
+### *Check the first function in shodan and mongodb. Nothing will work if one of those fail.*
 """
 
 tags_metadata = [
     {
         "name": "profile",
-        "description": "Login/Register/Forgot"
+        "description": "Login/Register/Change password"
     },
     {
         "name": "shodan",
@@ -64,8 +64,8 @@ async def login(email: str, password: str, remember: bool):
 
 
 @app.post("/register", tags=["profile"])
-async def register(user: str, email: str, passord: str):
-    return createNewUser(user, email, passord)
+async def register(user: str, email: str, password: str):
+    return createNewUser(user, email, password)
 
 
 @app.get("/userinfo", tags=["profile"])
