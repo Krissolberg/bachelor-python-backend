@@ -39,9 +39,11 @@ def userLogin(emailorusername: str, password: str, remember: bool):
 
 
 def updateUserPassword(email: str, password: str, new_password: str) -> str:
-    # We use this check to make sure the user exists
+    email = email.lower()
+
+    if len(password) < 3:
+        raise HTTPException(status_code=406, detail="Password has to be atleast 3 character")
     if not dbColDocuExist("users", "user", "email", email):
-        # We do not use 404 status code, because then we would reveil who has an account or not
         raise HTTPException(status_code=401, detail="Invalid credentials. Email does not exist.")
 
     user = findOne("users", "email", email, "user")
