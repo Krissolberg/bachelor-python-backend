@@ -8,6 +8,7 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def createNewUser(username, email, passord):
+    username, email = username.lower(), email.lower()
     if dbColDocuExist("users", "user", "email", email):
         raise HTTPException(status_code=422, detail="User with that e-mail already exists")
     if dbColDocuExist("users", "user", "username", username):
@@ -17,6 +18,7 @@ def createNewUser(username, email, passord):
 
 
 def userLogin(emailorusername: str, password: str, remember: bool):
+    emailorusername = emailorusername.lower()
     if dbColDocuExist("users", "user", "email", emailorusername):
         key = "email"
     elif dbColDocuExist("users", "user", "username", emailorusername):
