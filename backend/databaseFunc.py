@@ -193,8 +193,8 @@ def insertUser(db, col, username, email, password):
             },
             upsert=True)
 
-        client[db]["tokens"].create_index("expiration", expireAfterSeconds=(60*60*12))
-        client[db]["tokensLong"].create_index("expiration", expireAfterSeconds=(60*60*48))
+        client[db]["tokens"].create_index("expiration", expireAfterSeconds=43200)
+        client[db]["tokensLong"].create_index("expiration", expireAfterSeconds=172800)
 
         return f'La inn {username}: {email} i {col}'
     except:
