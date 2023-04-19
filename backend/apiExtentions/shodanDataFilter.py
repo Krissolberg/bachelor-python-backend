@@ -57,7 +57,7 @@ def getDesDB(inn, col):
         dbChecker = findOne('info_db', "name", x, col)
         if dbChecker:
             try:
-                dbFact[dbChecker['name']] = dbChecker['Des']
+                dbFact[dbChecker['name']] = dbChecker['des']
             except:
                 dbFact[str(x)] = "Something went wrong in getDesDB"
         else:

@@ -161,7 +161,7 @@ def tls_statement(versions_count):
         search = search + "withold"
 
     try:
-        return findOne("info_db", "name", search, "versiondes")['des']
+        return findOne("info_db", "name", search, "versionDes")['des']
     except:
         return f'Found no match of: {search}, in database.'
 
