@@ -47,7 +47,7 @@ def quicksortIP(array):
     return [str(ipaddress.ip_address(i)) for i in intArray]
 
 
-def getBesDB(inn, col):
+def getDesDB(inn, col):
     dbFact = {}
     if inn == "Not found":
         return [dbFact]
@@ -57,9 +57,9 @@ def getBesDB(inn, col):
         dbChecker = findOne('info_db', "name", x, col)
         if dbChecker:
             try:
-                dbFact[dbChecker['name']] = dbChecker['bes']
+                dbFact[dbChecker['name']] = dbChecker['Des']
             except:
-                dbFact[str(x)] = "Something went wrong in getBesDB"
+                dbFact[str(x)] = "Something went wrong in getDesDB"
         else:
             dbFact[str(x)] = "No information"
     return dbFact
@@ -69,7 +69,7 @@ def getLeaderTextVersion(version):
     match, eachVersion = {}, []
     for v in version.keys():
         if v != "Not found" and v != "text":
-            version["text"].update({f'{v}': findOne('info_db', "navn", v, 'versionBes')})
+            version["text"].update({f'{v}': findOne('info_db', "name", v, 'versionDes')})
             v = v.replace('[', '')
             v = v.replace("'", '')
             v = v.replace(']', '')
@@ -82,7 +82,7 @@ def getLeaderTextVersion(version):
 
 
 def checkDB(hostresult):
-    port, portBesTotal, version, vuln, match = {}, {}, {'text': {}}, {}, {}
+    port, portDesTotal, version, vuln, match = {}, {}, {'text': {}}, {}, {}
 
     for x in range(len(hostresult)):
         for key, value in hostresult[x].items():
@@ -90,18 +90,18 @@ def checkDB(hostresult):
                 continue
             ports, versions, vulns = value['ports'], value['versions'], value['vulns']
 
-            portBes = getBesDB(ports, 'portBes')
-            portBesTotal.update(portBes)
-            if portBes != [{}]:
-                value['ports'] = portBes
+            portDes = getDesDB(ports, 'portDes')
+            portDesTotal.update(portDes)
+            if portDes != [{}]:
+                value['ports'] = portDes
             else:
                 value['ports'] = "Not found"
             for x in ports:
                 port.update({f'{x}': port.get(f'{x}', 0) + 1})
 
-            versionBes = getBesDB(versions, 'versionsBes')
-            if versionBes != [{}]:
-                value['versions'] = versionBes
+            versionDes = getDesDB(versions, 'versionsDes')
+            if versionDes != [{}]:
+                value['versions'] = versionDes
             else:
                 value['versions'] = "Not found"
             if versions != "Not found":
@@ -109,11 +109,11 @@ def checkDB(hostresult):
             else:
                 version.update({'Not found': version.get('Not found', 0) + 1})
 
-            vulnsBes = getBesDB(vulns, 'vulnsBes')
-            if vulnsBes == [{}]:
+            vulnsDes = getDesDB(vulns, 'vulnsDes')
+            if vulnsDes == [{}]:
                 value['vulns'] = "Not found"
             else:
-                value['vulns'] = vulnsBes
+                value['vulns'] = vulnsDes
             if vulns != "Not found":
                 for x in vulns:
                     vuln.update({f'{x}': vuln.get(f'{x}', 0) + 1})
@@ -123,7 +123,7 @@ def checkDB(hostresult):
     version["text"].update({'leaderText': tls_statement((getLeaderTextVersion(version)))})
 
     port['total'] = sum(port.values())
-    port.update({'text': portBesTotal})
+    port.update({'text': portDesTotal})
 
     stat = {'stats': {'ports': port, 'versions': version, 'vulns': vuln}}
     return hostresult, stat
