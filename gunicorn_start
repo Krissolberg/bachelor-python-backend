@@ -1,14 +1,12 @@
 #!/bin/bash
 
-DIR=/home/s351869/bachelor-python-backend
-
-cd $DIR
+cd /home/s351869/bachelor-python-backend
 
 exec gunicorn main:app \
   --name bachelor-backend \
   --workers 3 \
   --worker-class uvicorn.workers.UvicornWorker \
   --timeout 300 \
-  --bind=unix:$DIR/run/gunicorn.sock \
+  --bind=unix:/home/s351869/bachelor-python-backend/run/gunicorn.sock \
   --log-level=error \
   --log-file=-

@@ -1,33 +1,29 @@
-from shodan import APIError
 from multiprocessing import Pool
-from backend.apiExtentions.shodanDataFilter import filterUrlIp, quicksort, iprangesplitter, quicksortIP, checkDB
 from backend.apiExtentions.shodanGetService import shodanSearch, shodanHost
+from backend.apiExtentions.shodanDataFilter import filterUrlIp, quicksort, iprangesplitter, quicksortIP, checkDB
 
 
-def shoSok(inndata):
-    # inndata er et array, denne kan inneholde både URL, IP og IP-range
+def shoSearch(ipUrlInput):
+    """
+     Input is a string array, which can include URL, single IP and IP-range.
+     We start with filterering single IPs and IP-ranges. Then take the remaining as URLs, and sort them A-Z.
 
-    # Filtrering av IP og IP-range
-    iprange, iprangesplit, ip = filterUrlIp(inndata)
+     We then continue with creating single IPs for each IP-ranges and add those to single IP list.
+     We do the same thing with URLs, but add the single IPs to their unique array.
 
-    # Filtrerer ut funnet IP og IP-range fra inndata
-    url = quicksort(list(set(inndata) - set(iprange) - set(ip)))
+     At last, we do the IP search.
+    """
 
-    # Initialiserer multiprocessing. Her har jeg valgt å ha 8 workers
+    searchresult, ipurl, hostresult = [], [], []
     pool = Pool(processes=8)
+    iprange, iprangesplit, ip = filterUrlIp(ipUrlInput)
 
-    # Lager individuell ip for range, og legger det i ip-array med multiprosessing
+    url = quicksort(list(set(ipUrlInput) - set(iprange) - set(ip)))
+
     for i in range(len(iprangesplit)):
-        try:
-            processes = pool.apply_async(func=iprangesplitter, args=(iprangesplit[i]))
-            ip.extend(processes.get())
-        except:
-            print("no")
+        processes = pool.apply_async(func=iprangesplitter, args=(iprangesplit[i]))
+        ip.extend(processes.get())
 
-    # Gjør en shodanSearch på Url, og legger funnet IP til IP-arrayet
-    # Det gjøres en sortering og
-    searchresult = []
-    ipUrl = []
     for i in url:
         try:
             temp = shodanSearch(i)
@@ -35,26 +31,23 @@ def shoSok(inndata):
             sortIP = quicksortIP(temp[i]['ip'])
             temp[i]['ip'] = sortIP
             temp[i]['result'] = len(sortIP)
-            ipUrl.extend(quicksortIP(temp[i]['ip']))
-        except APIError:
+            ipurl.extend(quicksortIP(temp[i]['ip']))
+        except:
             return 'Invalid API key or you do not have access to use APIfilters in Shodan'
 
-    # Gjør en fullstendig søk på hver IP og skriver ut ønsket data med multiprosessing
-    # Alle IP-ene blir også lagret i cache
-    hostresult = []
-    if len(ip) > 0 or len(ipUrl):
+    if len(ip) > 0 or len(ipurl):
         ip = quicksortIP(ip)
-        for i in ipUrl:
+        for i in ipurl:
             processes = pool.apply_async(func=shodanHost, args=[i])
             try:
                 hostresult.append(processes.get())
-            except SystemError:
+            except:
                 hostresult.append({i: 'No result'})
         for i in ip:
             processes = pool.apply_async(func=shodanHost, args=[i])
             try:
                 hostresult.append(processes.get())
-            except SystemError:
+            except:
                 hostresult.append({i: 'No result'})
 
     ipResult, stat = checkDB(hostresult)

@@ -18,6 +18,9 @@ dependencies = [
         'pymongo',
         'requests_cache',
         'uvicorn',
-        'gunicorn'
+        'gunicorn',
+        'motor',
+        'passlib',
+        'bcrypt'
         ]
 

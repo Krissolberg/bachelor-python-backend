@@ -16,7 +16,7 @@ def dbExist(db):
             else:
                 return False
     except:
-        raise TypeError("Kunne ikke hente info")
+        raise TypeError("Could not reach MongoDB. Is MongoDB running?")
 
 
 def dbColExist(db, col):
@@ -29,12 +29,12 @@ def dbColExist(db, col):
         return False
 
 
-def dbColDocuExist(db, col, key, navn):
+def dbColDocuExist(db, col, key, name):
     try:
         with timeout(5):
             dbExist(db)
             dbColExist(db, col)
-            if mongoClient()[db][col].count_documents({f'{key}': navn}, limit=1) != 0:
+            if mongoClient()[db][col].count_documents({f'{key}': name}, limit=1) != 0:
                 return True
             else:
                 return False

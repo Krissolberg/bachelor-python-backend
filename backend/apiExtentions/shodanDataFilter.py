@@ -26,18 +26,18 @@ def iprangesplitter(fra, til):
 
 
 def quicksort(array):
-    min, lik, stor = [], [], []
+    minimum, eq, maximum = [], [], []
 
     if len(array) > 1:
         pivot = array[0]
         for x in array:
             if x < pivot:
-                min.append(x)
+                minimum.append(x)
             elif x == pivot:
-                lik.append(x)
+                eq.append(x)
             elif x > pivot:
-                stor.append(x)
-        return quicksort(min) + lik + quicksort(stor)
+                maximum.append(x)
+        return quicksort(minimum) + eq + quicksort(maximum)
     else:
         return array
 
@@ -54,22 +54,22 @@ def getBesDB(inn, col):
     for x in inn:
         if not isinstance(x, str):
             x = str(x)
-        dbChecker = findOne('info_db', "navn", x, col)
+        dbChecker = findOne('info_db', "name", x, col)
         if dbChecker:
             try:
-                dbFact[dbChecker['navn']] = dbChecker['bes']
+                dbFact[dbChecker['name']] = dbChecker['bes']
             except:
-                dbFact[str(x)] = "Feil i db"
+                dbFact[str(x)] = "Something went wrong in getBesDB"
         else:
-            dbFact[str(x)] = "Ingen info i db"
+            dbFact[str(x)] = "No information"
     return dbFact
 
 
-def getLederTekstVersion(version):
+def getLeaderTextVersion(version):
     match, eachVersion = {}, []
     for v in version.keys():
-        if v != "Not found" and v != "tekst":
-            version["tekst"].update({f'{v}': findOne('info_db', "navn", v, 'versionBes')})
+        if v != "Not found" and v != "text":
+            version["text"].update({f'{v}': findOne('info_db', "navn", v, 'versionBes')})
             v = v.replace('[', '')
             v = v.replace("'", '')
             v = v.replace(']', '')
@@ -83,7 +83,7 @@ def getLederTekstVersion(version):
 
 
 def checkDB(hostresult):
-    port, portBesTotal, version, vuln, match = {}, {}, {'tekst': {}}, {}, {}
+    port, portBesTotal, version, vuln, match = {}, {}, {'text': {}}, {}, {}
 
     for x in range(len(hostresult)):
         for key, value in hostresult[x].items():
@@ -121,10 +121,10 @@ def checkDB(hostresult):
             else:
                 vuln.update({'Not found': vuln.get('Not found', 0) + 1})
 
-    version["tekst"].update({'lederTekst': tls_statement((getLederTekstVersion(version)))})
+    version["text"].update({'leaderText': tls_statement((getLeaderTextVersion(version)))})
 
     port['total'] = sum(port.values())
-    port.update({'tekst': portBesTotal})
+    port.update({'text': portBesTotal})
 
     stat = {'stats': {'ports': port, 'versions': version, 'vulns': vuln}}
     return hostresult, stat

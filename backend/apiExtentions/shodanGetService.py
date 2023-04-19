@@ -6,12 +6,21 @@ from backend import cacheService
 auth = "wqBocETm9zujq2lWjSaYFUOFBhXDqeHV"
 
 
+def verifyShodanKey():
+    return cacheService.nosession.get(f'https://api.shodan.io/api-info?key={auth}', timeout=3,
+                                      headers={'Cache-Control': 'no-cache, no-store'}).json()
+
+
+def shodanDNS(domain):
+    return Shodan(auth).dns.domain_info(domain=domain, history=False, type=None, page=1)
+
+
 def shodanSearch(indata):
     results, limit, counter = [], 200, 0
 
-    for banner in Shodan(auth).search_cursor(indata):
+    for x in Shodan(auth).search_cursor(indata):
 
-        results.append(banner)
+        results.append(x)
         counter += 1
         if counter >= limit:
             break
@@ -55,18 +64,3 @@ def shodanHost(ips):
 
     except:
         raise SystemError("noresult")
-
-
-def shodanDNS(domain):
-    try:
-        return Shodan(auth).dns.domain_info(domain=domain, history=False, type=None, page=1)
-    except:
-        raise SystemError("Fant ingen DNS, fungerer API-key?")
-
-
-def verifyKey():
-    try:
-        return cacheService.nosession.get(f'https://api.shodan.io/api-info?key={auth}', timeout=3,
-                                          headers={'Cache-Control': 'no-cache, no-store'}).json()
-    except:
-        return "Finner ingen Auth-key, har du lagt inn en fungerende Shodan API-key?"
