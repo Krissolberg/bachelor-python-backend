@@ -178,7 +178,7 @@ def findOneWithID(db, key, name, col):
         return "Something unexpected happened while searching."
 
 
-def insertUser(db, col, username, email, password):
+def insertUser(db, col, username, email, password, role):
     try:
         if not dbCheck.dbExist(db):
             return "Database does not exist."
@@ -188,7 +188,7 @@ def insertUser(db, col, username, email, password):
             'email': email
         },
             {
-                '$setOnInsert': {'username': username, 'email': email, 'password': password, 'logSearch': {},
+                '$setOnInsert': {'username': username, 'role': role, 'email': email, 'password': password, 'logSearch': {},
                                  'savedSearch': []}
             },
             upsert=True)
@@ -259,6 +259,7 @@ def saveSearch(db, col, tokenID, array):
             },
             upsert=True)
         ea = []
+        user = findOneWithID("users", "_id", tokenID['user'], "user")
         for key, value in user['logSearch'].items():
             for key1, value1 in value.items():
                 for value2 in value1:

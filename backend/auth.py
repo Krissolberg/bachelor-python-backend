@@ -7,11 +7,11 @@ from backend.apiExtentions.databaseCheck import dbColDocuExist
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def createNewUser(username, email, passord):
+def createNewUser(username, role, email, password):
     if dbColDocuExist("users", "user", "email", email):
         raise HTTPException(status_code=422, detail="User with that e-mail already exists")
 
-    return insertUser("users", "user", username, email, bcrypt_context.hash(passord))
+    return insertUser("users", "user", username, role, email, bcrypt_context.hash(password))
 
 
 def userLogin(email: str, password: str, remember: bool):
