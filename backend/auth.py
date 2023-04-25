@@ -7,49 +7,37 @@ from backend.apiExtentions.databaseCheck import dbColDocuExist
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def createNewUser(username, email, password):
-    username, email = username.lower(), email.lower()
+def createNewUser(username, role, email, password):
     if dbColDocuExist("users", "user", "email", email):
-        raise HTTPException(status_code=422, detail="User with that e-mail already exists.")
-    if dbColDocuExist("users", "user", "username", username):
-        raise HTTPException(status_code=422, detail="User with that username already exists.")
-    if len(password) < 3:
-        raise HTTPException(status_code=406, detail="Password has to be atleast 3 characters.")
+        raise HTTPException(status_code=422, detail="User with that e-mail already exists")
 
-    return insertUser("users", "user", username, email, bcrypt_context.hash(password))
+    return insertUser("users", "user", username, role, email, bcrypt_context.hash(password))
 
 
-def userLogin(emailorusername: str, password: str, remember: bool):
-    emailorusername = emailorusername.lower()
-    if dbColDocuExist("users", "user", "email", emailorusername):
-        key = "email"
-    elif dbColDocuExist("users", "user", "username", emailorusername):
-        key = "username"
-    else:
-        raise HTTPException(status_code=401, detail="Invalid credentials. Email/Username does not exist.")
+def userLogin(email: str, password: str, remember: bool):
+    if not dbColDocuExist("users", "user", "email", email):
+        raise HTTPException(status_code=401, detail="Invalid credentials. Email not in user")
 
-    user = findOne("users", key, emailorusername, "user")
+    user = findOne("users", "email", email, "user")
 
     if not bcrypt_context.verify(password, user["password"]):
-        raise HTTPException(status_code=401, detail="Invalid credentials. Wrong password.")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Hashed password not userpassword")
 
     token = uuid4()
-    updateToken('users', emailorusername, str(token), remember)
+    updateToken('users', email, str(token), remember)
     return token
 
 
 def updateUserPassword(email: str, password: str, new_password: str) -> str:
-    email = email.lower()
-
-    if len(new_password) < 3:
-        raise HTTPException(status_code=406, detail="New password has to be atleast 3 characters.")
+    # We use this check to make sure the user exists
     if not dbColDocuExist("users", "user", "email", email):
-        raise HTTPException(status_code=401, detail="Invalid credentials. Email does not exist.")
+        # We do not use 404 status code, because then we would reveil who has an account or not
+        raise HTTPException(status_code=401, detail="Invalid credentials. Email not in user")
 
     user = findOne("users", "email", email, "user")
 
     if not bcrypt_context.verify(password, user['password']):
-        raise HTTPException(status_code=401, detail="Invalid credentials. Wrong password.")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Hashed password not userpassword")
 
     return updatePassword(email, bcrypt_context.hash(new_password))
 
@@ -62,7 +50,7 @@ def getUserinfo(token: str):
     elif secondFind:
         return findOne("users", "_id", secondFind['user'], "user")
     else:
-        raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid.")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
 
 
 def updateSavedSearch(token: str, array):
@@ -84,7 +72,7 @@ def removeSavedSearch(token: str, removeArray):
     elif secondFind:
         return removeSearch("users", "user", secondFind, removeArray)
     else:
-        raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid.")
+        raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
 
 
 def validToken(token: str):
@@ -93,4 +81,4 @@ def validToken(token: str):
     elif findOne("users", "token", token, "tokensLong"):
         return True
     else:
-        return HTTPException(status_code=401, detail="Invalid credentials. Token is not valid.")
+        return HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")

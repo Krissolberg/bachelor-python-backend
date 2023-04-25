@@ -9,14 +9,14 @@ from backend.auth import createNewUser, userLogin, updateUserPassword, getUserin
     removeSavedSearch
 
 description = """
-## If something does not work
-### *Check the first function in shodan and mongodb. Nothing will work if one of those fail.*
+## Hvis noe ikke fungerer
+### *Sjekk første funksjon i shodan og mongodb. Hvis en av disse ikke fungerer, så vil ingenting fungere!*
 """
 
 tags_metadata = [
     {
         "name": "profile",
-        "description": "Login/Register/Change password"
+        "description": "Login/Register/Forgot"
     },
     {
         "name": "shodan",
@@ -58,14 +58,25 @@ def root():
     return "Good day, sir!"
 
 
+@app.get("/shodankeyverifier", tags=["shodan"])
+def verify_shodan_key():
+    try:
+        return verifyShodanKey()
+    except:
+        raise HTTPException(status_code=401, detail="Invalid ShodanAPI-key. Could not connect to Shodan.")
+
+
+# ... er det samme som Required fra pydantic
+
+
 @app.get("/login", tags=["profile"])
-async def login(emailorusername: str, password: str, remember: bool):
-    return userLogin(emailorusername, password, remember)
+async def login(email: str, password: str, remember: bool):
+    return userLogin(email, password, remember)
 
 
 @app.post("/register", tags=["profile"])
-async def register(user: str, email: str, password: str):
-    return createNewUser(user, email, password)
+async def register(user: str, role: bool, email: str, password: str):
+    return createNewUser(user, role, email, password)
 
 
 @app.get("/userinfo", tags=["profile"])
@@ -99,7 +110,7 @@ async def getSavedSearch(token: str):
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
 
 
-@app.delete("/removeSavedSearch", tags=["profile"])
+@app.delete("/removeOneSavedSearch", tags=["profile"])
 async def removeSearch(token: str, removeArray: List[str] = Query(...)):
     try:
         return removeSavedSearch(token, removeArray)
@@ -108,17 +119,6 @@ async def removeSearch(token: str, removeArray: List[str] = Query(...)):
 
 
 # ------------------------------------------------------------------------#
-
-@app.get("/shodankeyverifier", tags=["shodan"])
-def verify_shodan_key():
-    try:
-        return verifyShodanKey()
-    except:
-        raise HTTPException(status_code=401, detail="Invalid ShodanAPI-key. Could not connect to Shodan.")
-
-
-# ... er det samme som Required fra pydantic
-
 
 @app.get("/search", tags=["shodan"])
 async def shodan_search(auth: str, url_ip: List[str] = Query(...)):
