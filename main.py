@@ -9,8 +9,8 @@ from backend.auth import createNewUser, userLogin, updateUserPassword, getUserin
     removeSavedSearch
 
 description = """
-## Hvis noe ikke fungerer
-### *Sjekk første funksjon i shodan og mongodb. Hvis en av disse ikke fungerer, så vil ingenting fungere!*
+## If something does not work
+### *Check the first function in shodan and mongodb. Nothing will work if one of those fail.*
 """
 
 tags_metadata = [
@@ -70,8 +70,8 @@ def verify_shodan_key():
 
 
 @app.get("/login", tags=["profile"])
-async def login(email: str, password: str, remember: bool):
-    return userLogin(email, password, remember)
+async def login(emailorusername: str, password: str, remember: bool):
+    return userLogin(emailorusername, password, remember)
 
 
 @app.post("/register", tags=["profile"])
@@ -110,7 +110,7 @@ async def getSavedSearch(token: str):
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
 
 
-@app.delete("/removeOneSavedSearch", tags=["profile"])
+@app.delete("/removeSavedSearch", tags=["profile"])
 async def removeSearch(token: str, removeArray: List[str] = Query(...)):
     try:
         return removeSavedSearch(token, removeArray)
