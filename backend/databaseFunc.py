@@ -6,10 +6,6 @@ from backend.apiExtentions.databaseCheck import mongoClient
 
 client = mongoClient()
 
-timestamp = datetime.utcnow()
-date = timestamp.strftime("%d-%m-%Y")
-time = timestamp.strftime("%H:%M:%S")
-
 
 def verifyConnection():
     try:
@@ -221,6 +217,7 @@ def updatePassword(email, newpassword):
 
 
 def updateToken(db, email, token, remember):
+    timestamp = datetime.utcnow()
     col = "tokensLong" if remember else "tokens"
     try:
         if not dbCheck.dbExist(db):
@@ -243,6 +240,9 @@ def updateToken(db, email, token, remember):
 
 
 def saveSearch(db, col, tokenID, array):
+    timestamp = datetime.utcnow()
+    date = timestamp.strftime("%d-%m-%Y")
+    time = timestamp.strftime("%H:%M:%S")
     try:
         if not dbCheck.dbExist(db):
             return "Database does not exist."

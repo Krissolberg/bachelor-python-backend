@@ -10,12 +10,11 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def createNewUser(username, role, email, password):
     username, email = username.lower(), email.lower()
     if dbColDocuExist("users", "user", "email", email):
-        if dbColDocuExist("users", "user", "email", email):
-            raise HTTPException(status_code=422, detail="User with that e-mail already exists.")
-        if dbColDocuExist("users", "user", "username", username):
-            raise HTTPException(status_code=422, detail="User with that username already exists.")
-        if len(password) < 3:
-            raise HTTPException(status_code=406, detail="Password has to be atleast 3 characters.")
+        raise HTTPException(status_code=422, detail="User with that e-mail already exists.")
+    if dbColDocuExist("users", "user", "username", username):
+        raise HTTPException(status_code=422, detail="User with that username already exists.")
+    if len(password) <= 3:
+        raise HTTPException(status_code=406, detail="Password has to be atleast 3 characters.")
 
     return insertUser("users", "user", username, role, email, bcrypt_context.hash(password))
 
