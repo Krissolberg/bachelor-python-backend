@@ -178,7 +178,7 @@ def findOneWithID(db, key, name, col):
         return "Something unexpected happened while searching."
 
 
-def insertUser(db, col, username, email, password, role):
+def insertUser(db, col, username, role, email, password):
     try:
         if not dbCheck.dbExist(db):
             return "Database does not exist."
