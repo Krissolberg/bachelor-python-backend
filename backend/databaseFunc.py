@@ -130,6 +130,20 @@ def deleteOne(db, col, name):
         return "Something unexpected happened. Database and Collection exists, but could not delete data."
 
 
+def deleteOneUser(user):
+    try:
+        if not dbCheck.dbExist("users"):
+            return "Database does not exist."
+        if not dbCheck.dbColExist("users", "user"):
+            return "Collection does not exist."
+        if not dbCheck.dbColDocuExist("users", "user", "_id", user):
+            return "Data does not exist."
+        client["users"]["user"].delete_one({'_id': user})
+        return "Successfully removed user."
+    except:
+        return "Something unexpected happened. Database and Collection exists, but could not delete data."
+
+
 def tls_statement(versions_count):
     totalOldVersions, search = False, ""
     try:

@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from uuid import uuid4
 from passlib.context import CryptContext
-from backend.databaseFunc import insertUser, findOne, updateToken, saveSearch, updatePassword, removeSearch, updateRole
+from backend.databaseFunc import insertUser, findOne, updateToken, saveSearch, updatePassword, removeSearch, updateRole, deleteOneUser
 from backend.apiExtentions.databaseCheck import dbColDocuExist
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -65,6 +65,19 @@ def getUserinfo(token: str):
     else:
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid.")
 
+
+def findUsers(emailorusername: str):
+    emailorusername = emailorusername.lower()
+    if dbColDocuExist("users", "user", "email", emailorusername):
+        key = "email"
+    elif dbColDocuExist("users", "user", "username", emailorusername):
+        key = "username"
+    else:
+        raise HTTPException(status_code=401, detail="Invalid credentials. Email/Username does not exist.")
+
+    return findOne("users", key, emailorusername, "user")
+
+
 def updateUserRole(token: str, array):
     firstFind = findOne("users", "token", token, "tokens")
     secondFind = findOne("users", "token", token, "tokensLong")
@@ -74,6 +87,18 @@ def updateUserRole(token: str, array):
         return updateRole(secondFind, array)
     else:
         raise HTTPException(status_code=400, detail="Could not update role.")
+
+
+def deleteUsers(token: str):
+    firstFind = findOne("users", "token", token, "tokens")
+    secondFind = findOne("users", "token", token, "tokensLong")
+    if firstFind:
+        return deleteOneUser(firstFind['user'])
+    elif secondFind:
+        return secondFind(secondFind['user'])
+    else:
+        raise HTTPException(status_code=400, detail="Could not delete user, is token correct?")
+
 
 def updateSavedSearch(token: str, array):
     firstFind = findOne("users", "token", token, "tokens")

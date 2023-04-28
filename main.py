@@ -6,7 +6,7 @@ from backend.apiExtentions.shodanGetService import verifyShodanKey, shodanDNS
 from backend.databaseFunc import verifyConnection, getDatabases, getCol, getDataCol, findDocu, deleteOne, insertOne, \
     insertMany
 from backend.auth import createNewUser, userLogin, updateUserPassword, getUserinfo, validToken, updateSavedSearch, \
-    removeSavedSearch, updateUserRole
+    removeSavedSearch, updateUserRole, findUsers, deleteUsers
 
 description = """
 ## If something does not work
@@ -28,7 +28,7 @@ tags_metadata = [
     },
     {
         "name": "mongodb",
-        "description": "Operations with the database",
+        "description": "Operations with the database. These functions only work for info_db!",
         "externalDocs": {
             "description": "Link to offical PyMongo Doc",
             "url": "https://pymongo.readthedocs.io/en/stable/"
@@ -121,6 +121,16 @@ async def removeSearch(token: str, removeArray: List[str] = Query(...)):
         return removeSavedSearch(token, removeArray)
     except:
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid")
+
+
+@app.get("/findUser", tags=["profile"])
+async def findUser(usernameoremail):
+    return findUsers(usernameoremail)
+
+
+@app.delete("/deleteUser", tags=["profile"])
+async def deleteUser(token):
+    return deleteUsers(token)
 
 
 # ------------------------------------------------------------------------#
