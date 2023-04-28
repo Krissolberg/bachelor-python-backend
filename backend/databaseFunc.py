@@ -184,7 +184,8 @@ def insertUser(db, col, username, role, email, password):
             'email': email
         },
             {
-                '$setOnInsert': {'username': username, 'role': role, 'email': email, 'password': password, 'logSearch': {},
+                '$setOnInsert': {'username': username, 'role': role, 'email': email, 'password': password,
+                                 'logSearch': {},
                                  'savedSearch': []}
             },
             upsert=True)
@@ -239,6 +240,24 @@ def updateToken(db, email, token, remember):
         return "Something unexpected happened. Database and Collection exists, but could not update data."
 
 
+def updateRole(tokenID, role):
+    try:
+        if not dbCheck.dbExist("users"):
+            return "Database does not exist."
+        if not dbCheck.dbColExist("users", "user"):
+            return "Collection does not exist."
+        user = findOneWithID("users", "_id", tokenID['user'], "user")
+        client["users"]["user"].update_one({
+            '_id': user["_id"]
+        },
+            {
+                '$set': {'role': role}
+            }, upsert=True)
+        return True
+    except:
+        return False
+
+
 def saveSearch(db, col, tokenID, array):
     timestamp = datetime.utcnow()
     date = timestamp.strftime("%d-%m-%Y")
@@ -257,19 +276,15 @@ def saveSearch(db, col, tokenID, array):
             },
             upsert=True)
         ea = []
-        user = findOneWithID("users", "_id", tokenID['user'], "user")
-        for key, value in user['logSearch'].items():
-            for key1, value1 in value.items():
-                for value2 in value1:
-                    if value2 not in ea:
-                        ea.append(value2)
-        client[db][col].update_one({
-            '_id': user['_id']
-        },
-            {
-                '$set': {'savedSearch': ea}
+        for url in array:
+            ea.append(url)
+            client[db][col].update_one({
+                '_id': user['_id']
             },
-            upsert=True)
+                {
+                    '$set': {'savedSearch': ea}
+                },
+                upsert=True)
         return True
     except:
         return False

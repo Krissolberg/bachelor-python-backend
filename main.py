@@ -6,7 +6,7 @@ from backend.apiExtentions.shodanGetService import verifyShodanKey, shodanDNS
 from backend.databaseFunc import verifyConnection, getDatabases, getCol, getDataCol, findDocu, deleteOne, insertOne, \
     insertMany
 from backend.auth import createNewUser, userLogin, updateUserPassword, getUserinfo, validToken, updateSavedSearch, \
-    removeSavedSearch
+    removeSavedSearch, updateUserRole
 
 description = """
 ## If something does not work
@@ -87,6 +87,11 @@ async def userinfo(token):
 @app.put("/updatePassword", tags=["profile"])
 async def updatePassword(email: str, password: str, new_password: str):
     return updateUserPassword(email, password, new_password)
+
+
+@app.put("/updateRole", tags=["profile"])
+async def updateRole(token: str, role: bool):
+    return updateUserRole(token, role)
 
 
 @app.get("/checkToken", tags=["profile"])

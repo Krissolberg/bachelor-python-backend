@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from uuid import uuid4
 from passlib.context import CryptContext
-from backend.databaseFunc import insertUser, findOne, updateToken, saveSearch, updatePassword, removeSearch
+from backend.databaseFunc import insertUser, findOne, updateToken, saveSearch, updatePassword, removeSearch, updateRole
 from backend.apiExtentions.databaseCheck import dbColDocuExist
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -65,6 +65,15 @@ def getUserinfo(token: str):
     else:
         raise HTTPException(status_code=401, detail="Invalid credentials. Token is not valid.")
 
+def updateUserRole(token: str, array):
+    firstFind = findOne("users", "token", token, "tokens")
+    secondFind = findOne("users", "token", token, "tokensLong")
+    if firstFind:
+        return updateRole(firstFind, array)
+    elif secondFind:
+        return updateRole(secondFind, array)
+    else:
+        raise HTTPException(status_code=400, detail="Could not update role.")
 
 def updateSavedSearch(token: str, array):
     firstFind = findOne("users", "token", token, "tokens")
