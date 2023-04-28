@@ -34,7 +34,7 @@ def userLogin(emailorusername: str, password: str, remember: bool):
         raise HTTPException(status_code=401, detail="Invalid credentials. Wrong password.")
 
     token = uuid4()
-    updateToken('users', emailorusername, str(token), remember)
+    updateToken('users', key, emailorusername, str(token), remember)
     return token
 
 

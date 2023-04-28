@@ -217,7 +217,7 @@ def updatePassword(email, newpassword):
         return "Something unexpected happened. Database and Collection exists, but could not update data."
 
 
-def updateToken(db, email, token, remember):
+def updateToken(db, key, value, token, remember):
     timestamp = datetime.utcnow()
     col = "tokensLong" if remember else "tokens"
     try:
@@ -226,7 +226,7 @@ def updateToken(db, email, token, remember):
         if not dbCheck.dbColExist(db, col):
             return "Collection does not exist."
         try:
-            user = findOneWithID("users", "email", email, "user")
+            user = findOneWithID("users", key, value, "user")
         except:
             return "Could not find user"
         client[db][col].update_one({
