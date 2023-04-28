@@ -67,6 +67,15 @@ def findOne(db, key, name, col):
         return "Something unexpected happened while searching."
 
 
+def findOneNoPw(db, key, name, col):
+    try:
+        if not dbCheck.dbExist(db):
+            return "Database does not exist."
+        return client[db][col].find_one({f'{key}': name}, {'_id': 0, 'password': 0})
+    except:
+        return "Something unexpected happened while searching."
+
+
 def insertOne(db, col, name, des):
     try:
         if not dbCheck.dbExist(db):

@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from uuid import uuid4
 from passlib.context import CryptContext
-from backend.databaseFunc import insertUser, findOne, updateToken, saveSearch, updatePassword, removeSearch, updateRole, deleteOneUser
+from backend.databaseFunc import insertUser, findOne, updateToken, saveSearch, updatePassword, removeSearch, updateRole, deleteOneUser, findOneNoPw
 from backend.apiExtentions.databaseCheck import dbColDocuExist
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -75,7 +75,7 @@ def findUsers(emailorusername: str):
     else:
         raise HTTPException(status_code=401, detail="Invalid credentials. Email/Username does not exist.")
 
-    return findOne("users", key, emailorusername, "user")
+    return findOneNoPw("users", key, emailorusername, "user")
 
 
 def updateUserRole(token: str, array):
