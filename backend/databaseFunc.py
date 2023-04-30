@@ -299,15 +299,18 @@ def saveSearch(db, col, tokenID, array):
             },
             upsert=True)
         ea = []
-        for url in array:
+        for url in user['savedSearch']:
             ea.append(url)
-            client[db][col].update_one({
-                '_id': user['_id']
+        for url in array:
+            if url not in ea:
+                ea.append(url)
+        client[db][col].update_one({
+            '_id': user['_id']
+        },
+            {
+                '$set': {'savedSearch': ea}
             },
-                {
-                    '$set': {'savedSearch': ea}
-                },
-                upsert=True)
+            upsert=True)
         return True
     except:
         return False
